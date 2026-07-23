@@ -23,7 +23,7 @@ export function ProjectCard({ project, isActive, className }: ProjectCardProps) 
       whileHover={isActive ? { scale: 1.02 } : undefined}
       transition={{ type: "spring", stiffness: 320, damping: 28 }}
       className={cn(
-        "relative h-full w-full overflow-hidden rounded-lg shadow-[0_16px_40px_rgba(46,33,24,0.22)]",
+        "relative h-full w-full overflow-hidden rounded-sm shadow-[0_14px_36px_rgba(42,30,22,0.28)]",
         className
       )}
     >

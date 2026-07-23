@@ -95,13 +95,22 @@ export function Hero() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Dark contrast wash — photos stay visible, type stays crisp */}
+        {/* Dark contrast wash — amber film + deep vignette */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(46,33,24,0.78)_0%,rgba(30,20,14,0.82)_45%,rgba(46,33,24,0.88)_100%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(42,30,22,0.72)_0%,rgba(28,18,12,0.78)_42%,rgba(42,30,22,0.9)_100%)]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_40%,rgba(110,31,31,0.28),transparent_55%),linear-gradient(0deg,rgba(20,14,10,0.45),transparent_40%)] contrast-125"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_35%,rgba(95,27,27,0.32),transparent_58%),radial-gradient(ellipse_at_center,transparent_40%,rgba(14,8,4,0.55)_100%),linear-gradient(0deg,rgba(20,12,8,0.5),transparent_42%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] opacity-30 mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='3' cy='3' r='1.1' fill='%23efe4cc' fill-opacity='0.35'/%3E%3C/svg%3E\")",
+            backgroundSize: "4px 4px",
+          }}
           aria-hidden
         />
 
@@ -116,14 +125,14 @@ export function Hero() {
               <Logo size="lg" tone="light" />
             </div>
 
-            <h1 className="font-display text-4xl font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-[#f5ecd9] [text-shadow:0_2px_18px_rgba(20,10,6,0.45)] sm:text-5xl md:text-6xl lg:text-[4.1rem]">
               <span className="block whitespace-nowrap">Timplang May Puso,</span>
               <span className="block whitespace-nowrap">Himig na May Dama.</span>
             </h1>
 
             <hr className="mx-auto my-5 h-px w-40 border-0 bg-gradient-to-r from-transparent via-mustard/70 to-transparent" />
 
-            <p className="font-caption text-xs font-normal uppercase tracking-[0.24em] text-cream/75 sm:text-sm">
+            <p className="font-caption text-xs font-normal uppercase tracking-[0.28em] text-cream/70 sm:text-sm">
               Open Mic · Coffee · Community
             </p>
 

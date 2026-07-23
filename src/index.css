@@ -1,53 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors — slightly more muted / paper-aged */
-  --color-mustard: #c69a3d;
-  --color-mustard-light: #d9b25f;
-  --color-terracotta: #b5602e;
-  --color-terracotta-dark: #9a4f26;
-  --color-maroon: #6e1f1f;
-  --color-maroon-dark: #4e1414;
-  --color-espresso: #2e2118;
-  --color-espresso-soft: #3a2a1e;
-  --color-cream: #f0e6d2;
-  --color-cream-dark: #e8dcc2;
-  --color-cream-stain: #dcc9a8;
+  /* Brand colors — muted, paper-aged vintage mode */
+  --color-mustard: #c08f32;
+  --color-mustard-light: #d4a84a;
+  --color-terracotta: #a85728;
+  --color-terracotta-dark: #8f4620;
+  --color-maroon: #5f1b1b;
+  --color-maroon-dark: #421010;
+  --color-espresso: #2a1e16;
+  --color-espresso-soft: #3d2c20;
+  --color-cream: #efe4cc;
+  --color-cream-dark: #e4d5b8;
+  --color-cream-stain: #d4bf98;
 
-  /* Typography — literal names so @fontsource faces resolve */
-  --font-display: "Cormorant Garamond", serif; /* H1 */
-  --font-heading: "Fraunces", serif; /* H2 */
-  --font-accent: "Cormorant Garamond", serif;
-  --font-body: "Plus Jakarta Sans", sans-serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-caption: "Plus Jakarta Sans", sans-serif;
+  /* Typography — vintage poster / coffeehouse stack */
+  --font-display: "Playfair Display", serif; /* H1 */
+  --font-heading: "Oswald", sans-serif; /* H2 */
+  --font-accent: "Playfair Display", serif; /* Quotes */
+  --font-body: "Lora", serif;
+  --font-sans: "Oswald", sans-serif;
+  --font-caption: "Oswald", sans-serif;
 
-  /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
 
-  /* Shadows — warmer, print-like */
-  --shadow-soft: 0 2px 6px rgba(46, 33, 24, 0.1);
-  --shadow-card: 0 3px 10px rgba(46, 33, 24, 0.14), 0 1px 0 rgba(255, 248, 230, 0.35) inset;
-  --shadow-lift: 0 8px 22px rgba(46, 33, 24, 0.2);
+  --shadow-soft: 0 2px 5px rgba(42, 30, 22, 0.12);
+  --shadow-card:
+    0 3px 12px rgba(42, 30, 22, 0.16),
+    0 1px 0 rgba(255, 248, 230, 0.28) inset;
+  --shadow-lift: 0 10px 26px rgba(42, 30, 22, 0.24);
 }
 
 :root {
-  /* Shared texture urls */
   --texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --texture-fibers: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.035' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.28 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --texture-halftone: url("data:image/svg+xml,%3Csvg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='3' cy='3' r='1.15' fill='%232a1e16' fill-opacity='0.35'/%3E%3C/svg%3E");
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Lora", serif;
   }
 
   body {
     margin: 0;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Lora", serif;
     color: var(--color-espresso);
     background-color: var(--color-cream-dark);
     -webkit-font-smoothing: antialiased;
@@ -57,7 +57,7 @@
   #root {
     min-height: 100svh;
     width: 100%;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Lora", serif;
   }
 
   ::selection {
@@ -66,21 +66,22 @@
   }
 
   * {
-    border-color: rgba(46, 33, 24, 0.16);
+    border-color: rgba(42, 30, 22, 0.18);
   }
 }
 
 @layer utilities {
-  /* Sitewide aged-paper canvas */
+  /* Sitewide aged-paper canvas — coffee stains + parchment wash */
   .paper-canvas {
     position: relative;
     background-color: var(--color-cream-dark);
     background-image:
-      radial-gradient(ellipse 80% 50% at 10% 0%, rgba(198, 154, 61, 0.1), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 95% 15%, rgba(166, 67, 44, 0.07), transparent 50%),
-      radial-gradient(ellipse 70% 55% at 50% 100%, rgba(46, 33, 24, 0.07), transparent 55%),
-      radial-gradient(ellipse 40% 30% at 70% 45%, rgba(107, 107, 58, 0.05), transparent 60%),
-      linear-gradient(165deg, #f3ead7 0%, #e8dcc2 42%, #e2d4b6 100%);
+      radial-gradient(ellipse 55% 35% at 8% 12%, rgba(166, 90, 40, 0.14), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 92% 8%, rgba(110, 40, 30, 0.1), transparent 65%),
+      radial-gradient(ellipse 60% 45% at 70% 95%, rgba(42, 30, 22, 0.1), transparent 60%),
+      radial-gradient(ellipse 35% 28% at 40% 55%, rgba(107, 100, 50, 0.06), transparent 70%),
+      radial-gradient(ellipse 25% 20% at 18% 78%, rgba(180, 120, 50, 0.08), transparent 70%),
+      linear-gradient(168deg, #f2e6cf 0%, #e6d4b4 38%, #dcc9a4 72%, #d6c098 100%);
   }
 
   .paper-canvas::before {
@@ -89,10 +90,10 @@
     position: fixed;
     inset: 0;
     z-index: 40;
-    opacity: 0.055;
+    opacity: 0.09;
     mix-blend-mode: multiply;
     background-image: var(--texture-noise);
-    background-size: 220px 220px;
+    background-size: 180px 180px;
   }
 
   .paper-canvas::after {
@@ -101,21 +102,28 @@
     position: fixed;
     inset: 0;
     z-index: 41;
-    opacity: 0.04;
+    opacity: 0.07;
     mix-blend-mode: soft-light;
-    background-image: var(--texture-fibers);
-    background-size: 480px 480px;
+    background-image:
+      radial-gradient(ellipse at center, transparent 42%, rgba(42, 30, 22, 0.28) 100%),
+      var(--texture-fibers),
+      var(--texture-halftone);
+    background-size:
+      100% 100%,
+      420px 420px,
+      5px 5px;
   }
 
   /* Section / card paper surfaces */
   .paper-surface {
     position: relative;
     isolation: isolate;
-    background-color: #f2e8d4;
+    background-color: #efe3c8;
     background-image:
-      radial-gradient(ellipse at 18% 12%, rgba(198, 154, 61, 0.09), transparent 48%),
-      radial-gradient(ellipse at 88% 78%, rgba(181, 96, 46, 0.06), transparent 42%),
-      linear-gradient(180deg, #f5ecd9 0%, #ebe0c8 100%);
+      radial-gradient(ellipse at 14% 8%, rgba(192, 143, 50, 0.12), transparent 50%),
+      radial-gradient(ellipse at 90% 82%, rgba(168, 87, 40, 0.09), transparent 48%),
+      radial-gradient(ellipse at 50% 100%, rgba(42, 30, 22, 0.05), transparent 55%),
+      linear-gradient(185deg, #f4ead4 0%, #e8d8b8 55%, #dfcba8 100%);
   }
 
   .paper-surface::before {
@@ -124,10 +132,14 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    opacity: 0.09;
+    opacity: 0.13;
     mix-blend-mode: multiply;
-    background-image: var(--texture-noise);
-    background-size: 180px 180px;
+    background-image:
+      var(--texture-noise),
+      var(--texture-halftone);
+    background-size:
+      160px 160px,
+      4px 4px;
   }
 
   .paper-surface > * {
@@ -147,11 +159,11 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    opacity: 0.12;
+    opacity: 0.18;
     mix-blend-mode: multiply;
     background-image: var(--texture-noise);
     background-repeat: repeat;
-    background-size: 160px 160px;
+    background-size: 140px 140px;
   }
 
   .grain-overlay::after {
@@ -160,34 +172,38 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    opacity: 0.07;
+    opacity: 0.11;
     mix-blend-mode: soft-light;
     background-image:
-      radial-gradient(circle, rgba(46, 33, 24, 0.45) 0.6px, transparent 0.7px),
-      var(--texture-fibers);
+      radial-gradient(circle, rgba(42, 30, 22, 0.5) 0.55px, transparent 0.65px),
+      var(--texture-fibers),
+      radial-gradient(ellipse at center, transparent 50%, rgba(20, 12, 8, 0.35) 100%);
     background-size:
-      4px 4px,
-      420px 420px;
+      3.5px 3.5px,
+      380px 380px,
+      100% 100%;
     background-position:
       0 0,
+      center,
       center;
   }
 
   .grain-overlay-strong::before {
-    opacity: 0.16;
+    opacity: 0.22;
   }
 
   .grain-overlay-strong::after {
-    opacity: 0.1;
+    opacity: 0.14;
   }
 
-  /* Print-style double frame for cards */
+  /* Print-style double frame — stamped poster edge */
   .paper-frame {
-    border: 1px solid rgba(46, 33, 24, 0.22);
+    border: 1px solid rgba(42, 30, 22, 0.28);
     box-shadow:
-      inset 0 0 0 1px rgba(255, 248, 230, 0.35),
-      inset 0 0 40px rgba(46, 33, 24, 0.04),
-      0 3px 10px rgba(46, 33, 24, 0.12);
+      inset 0 0 0 1px rgba(255, 246, 220, 0.4),
+      inset 0 0 48px rgba(42, 30, 22, 0.06),
+      0 2px 0 rgba(255, 248, 230, 0.2),
+      0 4px 14px rgba(42, 30, 22, 0.14);
   }
 
   /* Soft edge vignette for photo / flyer inserts */
@@ -202,18 +218,20 @@
     position: absolute;
     inset: 0;
     z-index: 2;
-    box-shadow: inset 0 0 48px rgba(46, 33, 24, 0.28);
-    background: linear-gradient(
-      180deg,
-      rgba(46, 33, 24, 0.08) 0%,
-      transparent 28%,
-      transparent 65%,
-      rgba(46, 33, 24, 0.18) 100%
-    );
+    box-shadow: inset 0 0 56px rgba(42, 30, 22, 0.38);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(42, 30, 22, 0.12) 0%,
+        transparent 26%,
+        transparent 62%,
+        rgba(42, 30, 22, 0.22) 100%
+      ),
+      radial-gradient(ellipse at center, transparent 55%, rgba(42, 30, 22, 0.18) 100%);
   }
 
   .duotone-warm {
-    filter: sepia(0.5) saturate(0.8) brightness(0.9) contrast(1.08);
+    filter: sepia(0.62) saturate(0.72) brightness(0.88) contrast(1.12) hue-rotate(-6deg);
   }
 
   /* Ink-bleed divider */
@@ -223,10 +241,38 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(198, 154, 61, 0.55) 20%,
-      rgba(181, 96, 46, 0.45) 50%,
-      rgba(198, 154, 61, 0.55) 80%,
+      rgba(192, 143, 50, 0.65) 18%,
+      rgba(168, 87, 40, 0.55) 50%,
+      rgba(192, 143, 50, 0.65) 82%,
       transparent 100%
     );
+  }
+
+  /* Vintage nav strip */
+  .nav-vintage {
+    background-color: rgba(239, 227, 200, 0.94);
+    background-image:
+      linear-gradient(180deg, rgba(255, 248, 230, 0.35), transparent 40%),
+      radial-gradient(ellipse at 20% 0%, rgba(192, 143, 50, 0.08), transparent 50%);
+    border-bottom: 1px solid rgba(42, 30, 22, 0.22);
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 246, 220, 0.45),
+      0 1px 0 rgba(42, 30, 22, 0.06);
+  }
+
+  /* Print-pressed button feel */
+  .btn-print {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 230, 0.35),
+      0 2px 0 rgba(42, 30, 22, 0.12),
+      0 3px 8px rgba(42, 30, 22, 0.14);
+    text-shadow: 0 1px 0 rgba(255, 248, 230, 0.2);
+  }
+
+  .btn-print:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 230, 0.2),
+      0 1px 0 rgba(42, 30, 22, 0.18),
+      0 2px 6px rgba(42, 30, 22, 0.18);
   }
 }

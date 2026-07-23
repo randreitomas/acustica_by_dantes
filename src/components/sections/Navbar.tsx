@@ -19,8 +19,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-[100] border-b border-espresso/20",
-        "bg-[#f2e8d4]/95 backdrop-blur-sm"
+        "nav-vintage fixed inset-x-0 top-0 z-[100] backdrop-blur-[2px]"
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:h-[4.25rem] sm:px-8">
@@ -38,7 +37,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="group relative font-body text-xs font-medium uppercase tracking-[0.18em] text-espresso-soft transition-colors hover:text-espresso"
+              className="group relative font-caption text-xs font-medium uppercase tracking-[0.2em] text-espresso-soft transition-colors hover:text-espresso"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-mustard transition-all duration-250 group-hover:w-full" />
@@ -61,7 +60,7 @@ export function Navbar() {
       <div
         id="mobile-nav"
         className={cn(
-          "border-t border-espresso/15 bg-[#f2e8d4] lg:hidden",
+          "border-t border-espresso/15 bg-[#efe3c8] lg:hidden",
           open ? "block" : "hidden"
         )}
       >
@@ -70,7 +69,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-3 font-body text-sm font-medium uppercase tracking-[0.16em] text-espresso hover:bg-cream-stain/40"
+              className="rounded-md px-3 py-3 font-caption text-sm font-medium uppercase tracking-[0.18em] text-espresso hover:bg-cream-stain/40"
               onClick={() => setOpen(false)}
             >
               {link.label}

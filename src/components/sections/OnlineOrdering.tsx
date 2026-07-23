@@ -24,7 +24,7 @@ export function OnlineOrdering() {
             viewport={{ once: true }}
             transition={{ duration: 0.35 }}
           >
-            <h2 className="font-heading text-2xl font-semibold tracking-tight text-cream sm:text-3xl">
+            <h2 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-cream sm:text-3xl">
               Online Ordering
             </h2>
             <hr className="ink-rule mx-auto my-4 w-28" />
@@ -48,7 +48,7 @@ export function OnlineOrdering() {
                       decoding="async"
                     />
                   </div>
-                  <span className="w-full bg-espresso/85 py-1.5 font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-cream/90">
+                  <span className="w-full bg-espresso/85 py-1.5 font-caption text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-cream/90">
                     Coming Soon
                   </span>
                 </div>

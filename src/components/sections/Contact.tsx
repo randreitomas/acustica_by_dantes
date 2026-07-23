@@ -85,7 +85,7 @@ export function Contact() {
               className="flex flex-col justify-center gap-8"
             >
               <div>
-                <h3 className="mb-3 flex items-center gap-2 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
                   <MapPin className="size-4" aria-hidden />
                   Address
                 </h3>
@@ -99,7 +99,7 @@ export function Contact() {
               </div>
 
               <div>
-                <h3 className="mb-3 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
                   Reach Us
                 </h3>
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-3">
@@ -139,7 +139,7 @@ export function Contact() {
               </div>
 
               <div>
-                <h3 className="mb-3 flex items-center gap-2 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
                   <Clock className="size-4" aria-hidden />
                   Hours
                 </h3>
@@ -150,7 +150,7 @@ export function Contact() {
                       className="flex flex-col gap-0.5 border-b border-dotted border-cream/15 pb-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
                     >
                       <span className="font-body text-sm text-cream/90">{row.day}</span>
-                      <span className="font-body font-semibold text-xs uppercase tracking-wider text-cream/70">
+                      <span className="font-caption font-semibold text-xs uppercase tracking-wider text-cream/70">
                         {row.time}
                       </span>
                     </li>
