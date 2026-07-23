@@ -1,14 +1,19 @@
 import { motion } from "framer-motion"
-import { Clock, MapPin } from "lucide-react"
+import { Clock, Mail, MapPin, Phone } from "lucide-react"
 
 import { GrainOverlay } from "@/components/GrainOverlay"
 import { SectionHeading } from "@/components/SectionHeading"
+
+import mapPlaceholder from "@/assets/map-placeholder.png"
 
 const hours = [
   { day: "Sunday", time: "3:00 PM – 1:00 AM" },
   { day: "Monday – Tuesday", time: "11:00 AM – 1:00 AM" },
   { day: "Wednesday – Saturday", time: "11:00 AM – 2:00 AM" },
 ] as const
+
+const mapsUrl =
+  "https://www.google.com/maps/search/?api=1&query=Acustica+By+Dantes+España+Blvd+Manila"
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -38,13 +43,12 @@ function InstagramIcon({ className }: { className?: string }) {
 export function Contact() {
   return (
     <section id="contact" className="bg-espresso">
-      <GrainOverlay>
+      <GrainOverlay intensity="strong">
         <div className="relative z-[2] mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <SectionHeading
             tone="dark"
             eyebrow="Find Us"
             title="Contact & Location"
-            description="2nd Floor, Didache Building, #1508 España Blvd., Sampaloc, Manila — look for the warm lights and the open door."
           />
 
           <div className="grid gap-8 lg:grid-cols-2">
@@ -53,21 +57,23 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35 }}
-              className="overflow-hidden rounded-md border border-cream/10 bg-espresso-soft shadow-card"
+              className="overflow-hidden rounded-sm border border-cream/15 bg-espresso-soft shadow-card"
             >
-              <div
-                className="flex aspect-[4/3] flex-col items-center justify-center gap-3 bg-[linear-gradient(145deg,#3a2a1e_0%,#2e2118_50%,#4e1414_100%)] p-6 text-center"
-                role="img"
-                aria-label="Map placeholder for Acustica location"
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="group block aspect-[4/3] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
+                aria-label="Open Acustica By Dantes on Google Maps"
               >
-                <MapPin className="size-10 text-mustard" aria-hidden />
-                <p className="font-body font-semibold text-sm uppercase tracking-[0.18em] text-cream">
-                  Map Placeholder
-                </p>
-                <p className="max-w-xs font-body text-sm text-cream/70">
-                  Interactive map embed goes here — #1508 España Blvd., Sampaloc, Manila
-                </p>
-              </div>
+                <img
+                  src={mapPlaceholder}
+                  alt="Map showing Acustica By Dantes on España Blvd near UST, Sampaloc, Manila"
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
             </motion.div>
 
             <motion.div
@@ -89,6 +95,26 @@ export function Contact() {
                   <br />
                   #1508 España Blvd., Sampaloc, Manila
                 </p>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="mb-3 flex items-center gap-2 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                  Reach Us
+                </h3>
+                <a
+                  href="tel:+639554937058"
+                  className="flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                >
+                  <Phone className="size-4 shrink-0 text-mustard" aria-hidden />
+                  0955 493 7058
+                </a>
+                <a
+                  href="mailto:acusticabistro@gmail.com"
+                  className="flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                >
+                  <Mail className="size-4 shrink-0 text-mustard" aria-hidden />
+                  acusticabistro@gmail.com
+                </a>
               </div>
 
               <div>

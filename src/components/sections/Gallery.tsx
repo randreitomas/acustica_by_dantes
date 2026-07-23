@@ -62,15 +62,15 @@ const feedItems = [
 
 export function Gallery() {
   return (
-    <section id="gallery" className="bg-cream py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+    <section id="gallery" className="paper-surface overflow-hidden py-16 sm:py-24">
+      <div className="relative z-[2] mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Events & Community"
           title="The Feed"
           description="Real flyers from the wall — open mics, acoustic nights, and the holidays we celebrate together."
         />
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
           {feedItems.map((item, index) => (
             <motion.a
               key={item.label}
@@ -82,18 +82,18 @@ export function Gallery() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.28, delay: (index % 6) * 0.04 }}
               whileHover={{ scale: 1.02 }}
-              className="group relative aspect-[819/1024] overflow-hidden bg-cream-dark shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
+              className="aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
               aria-label={item.alt}
             >
               <img
                 src={item.src}
                 alt={item.alt}
-                className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                className="relative z-[1] h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                 loading="lazy"
                 decoding="async"
               />
-              <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/75 to-transparent px-2.5 pb-2.5 pt-8 opacity-0 transition-opacity duration-250 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="font-poster text-sm uppercase tracking-[0.08em] text-cream">
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] bg-gradient-to-t from-espresso/75 to-transparent px-2.5 pb-2.5 pt-8 opacity-0 transition-opacity duration-250 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="font-caption text-xs font-semibold uppercase tracking-[0.12em] text-cream">
                   {item.label}
                 </span>
               </span>

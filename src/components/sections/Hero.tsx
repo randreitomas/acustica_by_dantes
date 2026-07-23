@@ -1,94 +1,167 @@
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 
 import { GrainOverlay } from "@/components/GrainOverlay"
 import { Logo } from "@/components/Logo"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+
+import hero01 from "@/assets/hero/01-bar-crew.png"
+import hero02 from "@/assets/hero/02-table-group.png"
+import hero03 from "@/assets/hero/03-guitarist.png"
+import hero04 from "@/assets/hero/04-celebration.png"
+import hero05 from "@/assets/hero/05-friends.png"
+import hero06 from "@/assets/hero/06-dinner.png"
+import hero07 from "@/assets/hero/07-window-lounge.png"
+
+const slides = [
+  {
+    src: hero01,
+    alt: "The Acustica crew laughing behind the bar",
+  },
+  {
+    src: hero02,
+    alt: "Friends gathered around a table during an open mic night",
+  },
+  {
+    src: hero03,
+    alt: "A guitarist performing live at Acustica",
+  },
+  {
+    src: hero04,
+    alt: "Guests celebrating together at Acustica",
+  },
+  {
+    src: hero05,
+    alt: "Friends smiling together at Acustica",
+  },
+  {
+    src: hero06,
+    alt: "A shared meal around the table at Acustica",
+  },
+  {
+    src: hero07,
+    alt: "Friends talking by the window lounge at Acustica",
+  },
+] as const
+
+const SLIDE_MS = 5200
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
+  const [index, setIndex] = useState(0)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   })
-  const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"])
+  const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"])
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    if (reduceMotion.matches) return
+
+    const id = window.setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length)
+    }, SLIDE_MS)
+
+    return () => window.clearInterval(id)
+  }, [])
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative overflow-hidden bg-mustard"
+      className="relative overflow-hidden bg-espresso"
+      aria-roledescription="carousel"
+      aria-label="Acustica moments"
     >
-      <GrainOverlay className="relative min-h-[88svh] overflow-hidden">
+      <GrainOverlay intensity="strong" className="relative min-h-[88svh] overflow-hidden">
         <motion.div
           style={{ y: textureY }}
-          className="pointer-events-none absolute inset-[-20%] bg-[radial-gradient(circle_at_20%_20%,#d9b25f_0%,transparent_45%),radial-gradient(circle_at_80%_70%,#b5602e_0%,transparent_40%),linear-gradient(160deg,#c69a3d_0%,#b5602e_100%)]"
+          className="pointer-events-none absolute inset-[-12%]"
+          aria-hidden
+        >
+          <AnimatePresence mode="sync" initial={false}>
+            <motion.img
+              key={slides[index].src}
+              src={slides[index].src}
+              alt=""
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.1, ease: [0.4, 0, 0.2, 1] }}
+              className="duotone-warm absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Dark contrast wash — photos stay visible, type stays crisp */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(46,33,24,0.78)_0%,rgba(30,20,14,0.82)_45%,rgba(46,33,24,0.88)_100%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_40%,rgba(110,31,31,0.28),transparent_55%),linear-gradient(0deg,rgba(20,14,10,0.45),transparent_40%)] contrast-125"
           aria-hidden
         />
 
-        <div className="relative z-[2] mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-28">
+        <div className="relative z-[2] mx-auto flex min-h-[88svh] max-w-6xl flex-col items-center justify-center px-5 py-16 sm:px-8 sm:py-24 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="text-center lg:text-left"
+            className="mx-auto w-full max-w-3xl text-center"
           >
-            <div className="mb-6 flex justify-center lg:justify-start">
-              <Logo size="lg" />
+            <div className="mb-6 flex justify-center">
+              <Logo size="lg" tone="light" />
             </div>
 
-            <p className="mb-4 font-caption text-xs font-normal uppercase tracking-[0.24em] text-espresso/80">
+            <h1 className="font-display text-4xl font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+              <span className="block whitespace-nowrap">Timplang May Puso,</span>
+              <span className="block whitespace-nowrap">Himig na May Dama.</span>
+            </h1>
+
+            <hr className="mx-auto my-5 h-px w-40 border-0 bg-gradient-to-r from-transparent via-mustard/70 to-transparent" />
+
+            <p className="font-caption text-xs font-normal uppercase tracking-[0.24em] text-cream/75 sm:text-sm">
               Open Mic · Coffee · Community
             </p>
 
-            <h1 className="font-display text-4xl font-bold leading-[0.95] tracking-tight text-espresso sm:text-5xl md:text-6xl lg:text-[4.5rem]">
-              Warm Lights.
-              <br />
-              Shared Songs.
-            </h1>
-
-            <p className="mx-auto mt-5 max-w-md font-body text-base font-normal leading-relaxed text-espresso-soft sm:text-lg lg:mx-0">
-              Acustica is an intimate open-mic venue and coffeehouse on España —
-              where local voices take the stage and the neighborhood stays awhile.
-            </p>
-
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild size="lg">
                 <a href="#menu">Explore the Menu</a>
               </Button>
-              <Button asChild variant="secondary" size="lg">
-                <a href="#reservations">Reserve a Seat</a>
-              </Button>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.08, ease: [0.4, 0, 0.2, 1] }}
-            className="relative mx-auto w-full max-w-md lg:max-w-none"
+          <div
+            className="absolute bottom-6 left-1/2 z-[3] flex -translate-x-1/2 gap-2 sm:bottom-8"
+            role="tablist"
+            aria-label="Slideshow slides"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-espresso/15 shadow-lift sm:aspect-square">
-              <div
-                className="duotone-warm h-full w-full bg-[linear-gradient(160deg,rgba(46,33,24,0.35),rgba(110,31,31,0.25)),radial-gradient(circle_at_40%_30%,#ede1c9_0%,#3a2a1e_55%,#2e2118_100%)]"
-                role="img"
-                aria-label="Performer on stage under warm amber light"
-              >
-                <div className="flex h-full flex-col items-center justify-end gap-2 p-6 text-center">
-                  <p className="font-caption text-xs font-normal uppercase tracking-[0.2em] text-cream/80">
-                    Live Stage Ambiance
-                  </p>
-                  <p className="font-accent text-lg italic text-mustard-light">
-                    Photo placeholder
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -bottom-3 -left-3 rounded-full border border-mustard/40 bg-espresso px-4 py-2 font-caption text-[0.65rem] font-normal uppercase tracking-[0.18em] text-cream shadow-soft">
-              Thu · Sat Open Mic
-            </div>
-          </motion.div>
+            {slides.map((slide, i) => (
+              <button
+                key={slide.src}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Show photo ${i + 1}: ${slide.alt}`}
+                onClick={() => setIndex(i)}
+                className={cn(
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  i === index
+                    ? "w-7 bg-cream"
+                    : "w-1.5 bg-cream/35 hover:bg-cream/55"
+                )}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Screen-reader live region for current slide */}
+        <p className="sr-only" aria-live="polite">
+          {slides[index].alt}
+        </p>
       </GrainOverlay>
     </section>
   )

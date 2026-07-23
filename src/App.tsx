@@ -6,21 +6,19 @@ import { Hero } from "@/components/sections/Hero"
 import { Menu } from "@/components/sections/Menu"
 import { Navbar } from "@/components/sections/Navbar"
 import { OnlineOrdering } from "@/components/sections/OnlineOrdering"
-import { Reservations } from "@/components/sections/Reservations"
 import { Reviews } from "@/components/sections/Reviews"
 
 export default function App() {
   return (
-    <div className="min-h-svh bg-cream font-body text-espresso">
+    <div className="paper-canvas min-h-svh font-body text-espresso">
       <Navbar />
-      <main>
+      <main className="pt-16 sm:pt-[4.25rem]">
         <Hero />
         <Menu />
         <About />
         <Gallery />
-        <Reservations />
-        <Contact />
         <Reviews />
+        <Contact />
         <OnlineOrdering />
       </main>
       <Footer />

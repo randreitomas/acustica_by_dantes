@@ -1,29 +1,19 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-transparent font-body text-sm font-semibold uppercase tracking-[0.14em] whitespace-nowrap transition-all outline-none select-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-transparent font-body text-sm font-semibold uppercase tracking-[0.14em] whitespace-nowrap transition-all outline-none select-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 focus-visible:ring-offset-[#f0e6d2] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default:
-          "bg-mustard text-espresso hover:bg-terracotta hover:text-cream",
-        secondary:
-          "border-espresso/25 bg-cream text-espresso hover:border-espresso/40 hover:bg-cream-dark",
-        dark: "bg-maroon text-cream hover:bg-maroon-dark",
-        outline:
-          "border-espresso/30 bg-transparent text-espresso hover:bg-espresso/5",
-        ghost: "text-espresso hover:bg-espresso/5",
-        link: "text-mustard underline-offset-4 hover:underline",
+          "border-espresso/10 bg-mustard text-espresso shadow-soft hover:brightness-[1.04] hover:bg-terracotta hover:text-cream",
       },
       size: {
         default: "h-11 px-5",
-        sm: "h-9 px-4 text-xs",
         lg: "h-12 px-7 text-base",
-        icon: "size-10",
       },
     },
     defaultVariants: {
@@ -38,22 +28,25 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
   }) {
-  const Comp = asChild ? Slot.Root : "button"
+  const classes = cn(buttonVariants({ variant, size, className }))
+
+  if (asChild && React.isValidElement<{ className?: string }>(children)) {
+    return React.cloneElement(children, {
+      className: cn(classes, children.props.className),
+    })
+  }
 
   return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
+    <button data-slot="button" className={classes} {...props}>
+      {children}
+    </button>
   )
 }
 
-export { Button, buttonVariants }
+export { Button }
