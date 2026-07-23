@@ -51,25 +51,26 @@ export function Contact() {
             title="Contact & Location"
           />
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35 }}
-              className="overflow-hidden rounded-sm border border-cream/15 bg-espresso-soft shadow-card"
             >
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group block aspect-[4/3] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
+                className="group block overflow-hidden rounded-sm border border-cream/15 bg-espresso-soft shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
                 aria-label="Open Acustica By Dantes on Google Maps"
               >
                 <img
                   src={mapPlaceholder}
                   alt="Map showing Acustica By Dantes on España Blvd near UST, Sampaloc, Manila"
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  width={1024}
+                  height={695}
+                  className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.02]"
                   loading="lazy"
                   decoding="async"
                 />
@@ -97,24 +98,44 @@ export function Contact() {
                 </p>
               </div>
 
-              <div className="space-y-3">
-                <h3 className="mb-3 flex items-center gap-2 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+              <div>
+                <h3 className="mb-3 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
                   Reach Us
                 </h3>
-                <a
-                  href="tel:+639554937058"
-                  className="flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
-                >
-                  <Phone className="size-4 shrink-0 text-mustard" aria-hidden />
-                  0955 493 7058
-                </a>
-                <a
-                  href="mailto:acusticabistro@gmail.com"
-                  className="flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
-                >
-                  <Mail className="size-4 shrink-0 text-mustard" aria-hidden />
-                  acusticabistro@gmail.com
-                </a>
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-3">
+                  <a
+                    href="tel:+639554937058"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                  >
+                    <Phone className="size-4 shrink-0 text-mustard" aria-hidden />
+                    0955 493 7058
+                  </a>
+                  <a
+                    href="mailto:acusticabistro@gmail.com"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                  >
+                    <Mail className="size-4 shrink-0 text-mustard" aria-hidden />
+                    acusticabistro@gmail.com
+                  </a>
+                  <a
+                    href="https://www.facebook.com/AcusticabyDantes/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                  >
+                    <FacebookIcon className="size-4 shrink-0 text-mustard" />
+                    Facebook
+                  </a>
+                  <a
+                    href="https://www.instagram.com/acusticabydantes/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                  >
+                    <InstagramIcon className="size-4 shrink-0 text-mustard" />
+                    Instagram
+                  </a>
+                </div>
               </div>
 
               <div>
@@ -135,32 +156,6 @@ export function Contact() {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-3 font-body font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
-                  Social
-                </h3>
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href="https://www.facebook.com/AcusticabyDantes/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 font-body font-semibold text-xs uppercase tracking-[0.16em] text-mustard transition-colors hover:text-mustard-light"
-                  >
-                    <FacebookIcon className="size-4" />
-                    Facebook
-                  </a>
-                  <a
-                    href="https://www.instagram.com/acusticabydantes/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 font-body font-semibold text-xs uppercase tracking-[0.16em] text-mustard transition-colors hover:text-mustard-light"
-                  >
-                    <InstagramIcon className="size-4" />
-                    Instagram
-                  </a>
-                </div>
               </div>
             </motion.div>
           </div>

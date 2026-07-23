@@ -67,7 +67,13 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Events & Community"
           title="The Feed"
-          description="Real flyers from the wall — open mics, acoustic nights, and the holidays we celebrate together."
+          description={
+            <>
+              Real flyers from the wall — open mics, acoustic nights,
+              <br />
+              and the holidays we celebrate together.
+            </>
+          }
         />
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">

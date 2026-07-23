@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
+import type { ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 
 type SectionHeadingProps = {
   eyebrow?: string
   title: string
-  description?: string
+  description?: ReactNode
   align?: "left" | "center"
   tone?: "light" | "dark"
   className?: string
