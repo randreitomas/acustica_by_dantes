@@ -24,7 +24,7 @@ export function OnlineOrdering() {
             viewport={{ once: true }}
             transition={{ duration: 0.35 }}
           >
-            <h2 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-cream sm:text-3xl">
+            <h2 className="font-heading text-2xl font-semibold tracking-tight text-cream sm:text-3xl">
               Online Ordering
             </h2>
             <hr className="ink-rule mx-auto my-4 w-28" />

@@ -46,7 +46,9 @@ export function useCarousel({
   const [activeIndex, setActiveIndex] = useState(() =>
     length > 0 ? ((initialIndex % length) + length) % length : 0
   )
-  const [breakpoint, setBreakpoint] = useState<CarouselBreakpoint>("desktop")
+  const [breakpoint, setBreakpoint] = useState<CarouselBreakpoint>(() =>
+    typeof window !== "undefined" ? getBreakpoint(window.innerWidth) : "mobile"
+  )
 
   useEffect(() => {
     const update = () => setBreakpoint(getBreakpoint(window.innerWidth))

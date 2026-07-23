@@ -4,6 +4,7 @@ import {
   useMotionValue,
   type PanInfo,
 } from "framer-motion"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useId, useRef } from "react"
 
 import { cn } from "@/lib/utils"
@@ -36,6 +37,7 @@ function slotTransform(
   opacity: number
   zIndex: number
 } {
+  // Mobile: flat center card only (neighbors are not mounted)
   if (breakpoint === "mobile") {
     return { x: 0, rotateY: 0, scale: 1, opacity: 1, zIndex: 30 }
   }
@@ -64,7 +66,7 @@ function slotTransform(
 }
 
 /**
- * 3D stacked carousel — no stage chrome, sits on the page background.
+ * 3D stacked carousel on tablet/desktop; flat swipeable board on mobile.
  */
 export function ProjectCarousel({
   projects,
@@ -75,9 +77,13 @@ export function ProjectCarousel({
   const stageRef = useRef<HTMLDivElement>(null)
   const dragX = useMotionValue(0)
 
-  const { breakpoint, next, prev, goTo, getSlot, isVisible } = useCarousel({
-    length: projects.length,
-  })
+  const { activeIndex, breakpoint, next, prev, goTo, getSlot, isVisible } =
+    useCarousel({
+      length: projects.length,
+    })
+
+  const isMobile = breakpoint === "mobile"
+  const dragThreshold = isMobile ? 40 : CAROUSEL_DRAG_THRESHOLD
 
   useEffect(() => {
     const node = stageRef.current
@@ -103,10 +109,10 @@ export function ProjectCarousel({
   const onDragEnd = (_: unknown, info: PanInfo) => {
     const { offset, velocity } = info
     const swiped =
-      Math.abs(offset.x) > CAROUSEL_DRAG_THRESHOLD || Math.abs(velocity.x) > 500
+      Math.abs(offset.x) > dragThreshold || Math.abs(velocity.x) > 400
 
     if (swiped) {
-      if (offset.x < 0 || velocity.x < -500) next()
+      if (offset.x < 0 || velocity.x < -400) next()
       else prev()
     }
 
@@ -127,16 +133,25 @@ export function ProjectCarousel({
         className="relative outline-none focus-visible:ring-2 focus-visible:ring-mustard/50 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
       >
         <div
-          className="relative mx-auto flex w-full max-w-5xl items-center justify-center px-4 py-2 sm:px-8"
-          style={{ perspective: 1200, perspectiveOrigin: "50% 50%" }}
+          className="relative mx-auto flex w-full max-w-5xl items-center justify-center gap-2 px-2 py-2 sm:gap-4 sm:px-8"
+          style={{ perspective: isMobile ? undefined : 1200, perspectiveOrigin: "50% 50%" }}
         >
-          {/* Width-driven frame locked to menu board ratio 1080×1350 */}
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous menu board"
+            className="z-20 inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-espresso/25 bg-cream/80 text-espresso shadow-soft transition-colors hover:bg-mustard hover:text-espresso sm:size-12"
+          >
+            <ChevronLeft className="size-5" aria-hidden />
+          </button>
+
           <motion.div
             className="relative aspect-[1080/1350] w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[400px]"
-            style={{ x: dragX, transformStyle: "preserve-3d" }}
+            style={{ x: dragX, transformStyle: isMobile ? undefined : "preserve-3d" }}
             drag="x"
+            dragDirectionLock
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.18}
+            dragElastic={0.2}
             onDragEnd={onDragEnd}
           >
             {projects.map((project, index) => {
@@ -151,11 +166,14 @@ export function ProjectCarousel({
                 <motion.div
                   key={project.id}
                   className="absolute inset-0 cursor-grab active:cursor-grabbing"
-                  style={{ transformStyle: "preserve-3d", zIndex: t.zIndex }}
+                  style={{
+                    transformStyle: isMobile ? undefined : "preserve-3d",
+                    zIndex: t.zIndex,
+                  }}
                   initial={false}
                   animate={{
                     x: t.x,
-                    rotateY: t.rotateY,
+                    rotateY: isMobile ? 0 : t.rotateY,
                     scale: t.scale,
                     opacity: t.opacity,
                     zIndex: t.zIndex,
@@ -171,8 +189,39 @@ export function ProjectCarousel({
               )
             })}
           </motion.div>
+
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next menu board"
+            className="z-20 inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-espresso/25 bg-cream/80 text-espresso shadow-soft transition-colors hover:bg-mustard hover:text-espresso sm:size-12"
+          >
+            <ChevronRight className="size-5" aria-hidden />
+          </button>
         </div>
 
+        <div
+          className="mt-4 flex justify-center gap-2"
+          role="tablist"
+          aria-label="Menu boards"
+        >
+          {projects.map((project, index) => (
+            <button
+              key={project.id}
+              type="button"
+              role="tab"
+              aria-selected={index === activeIndex}
+              aria-label={`Show ${project.title}`}
+              onClick={() => goTo(index)}
+              className={cn(
+                "h-2 rounded-sm transition-all duration-250",
+                index === activeIndex
+                  ? "w-7 bg-mustard"
+                  : "w-2 bg-espresso/25 hover:bg-espresso/40"
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
