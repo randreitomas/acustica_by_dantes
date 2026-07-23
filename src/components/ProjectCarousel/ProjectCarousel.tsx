@@ -177,9 +177,6 @@ function MobileMenuStrip({
                 decoding="async"
               />
             </div>
-            <p className="mt-3 text-center font-caption text-xs font-medium uppercase tracking-[0.16em] text-espresso-soft">
-              {project.title}
-            </p>
           </div>
         ))}
       </div>
