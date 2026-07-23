@@ -13,7 +13,7 @@ import type { LucideIcon } from "lucide-react"
 import { SectionHeading } from "@/components/SectionHeading"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-type MenuItem = { name: string; price: string }
+type MenuItem = { name: string; price: string; detail?: string }
 
 type MenuSection = {
   title: string
@@ -156,7 +156,7 @@ export function Menu() {
             >
               <Card className="h-full grain-overlay">
                 <CardHeader className="relative z-[2]">
-                  <CardTitle className="flex items-center gap-2 font-accent text-2xl font-medium italic normal-case tracking-normal text-terracotta">
+                  <CardTitle className="flex items-center gap-2 font-menu-heading text-3xl font-normal normal-case tracking-normal text-terracotta sm:text-[2rem]">
                     <section.icon className="size-5 shrink-0" aria-hidden />
                     {section.title}
                   </CardTitle>
@@ -167,10 +167,17 @@ export function Menu() {
                       <li key={`${section.title}-${item.name}`}>
                         {index > 0 ? <hr className="dotted-rule my-2.5" /> : null}
                         <div className="flex items-baseline justify-between gap-4">
-                          <p className="font-display text-sm font-bold uppercase tracking-tight text-espresso sm:text-base">
-                            {item.name}
-                          </p>
-                          <p className="shrink-0 font-body text-sm font-semibold tracking-wide text-maroon">
+                          <div className="min-w-0">
+                            <p className="font-menu-item text-base leading-snug text-espresso sm:text-lg">
+                              {item.name}
+                            </p>
+                            {item.detail ? (
+                              <p className="mt-0.5 font-menu-desc text-sm italic text-espresso-soft/80">
+                                {item.detail}
+                              </p>
+                            ) : null}
+                          </div>
+                          <p className="shrink-0 font-menu-item text-base font-bold text-maroon sm:text-lg">
                             {item.price}
                           </p>
                         </div>

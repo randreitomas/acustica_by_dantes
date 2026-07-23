@@ -26,6 +26,9 @@
   --font-script: "Cormorant Garamond", serif;
   --font-body: "Plus Jakarta Sans", sans-serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-menu-heading: "Allura", cursive;
+  --font-menu-item: "IM Fell English", "Alegreya", serif;
+  --font-menu-desc: "Cormorant Garamond", serif;
 
   /* Radius */
   --radius-sm: 4px;

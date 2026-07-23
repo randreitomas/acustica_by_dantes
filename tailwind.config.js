@@ -19,6 +19,9 @@ export default {
         script: ['"Cormorant Garamond"', 'serif'],
         body: ['"Plus Jakarta Sans"', 'sans-serif'],
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        'menu-heading': ['Allura', 'cursive'],
+        'menu-item': ['"IM Fell English"', 'Alegreya', 'serif'],
+        'menu-desc': ['"Cormorant Garamond"', 'serif'],
       },
       borderRadius: {
         DEFAULT: '8px',
