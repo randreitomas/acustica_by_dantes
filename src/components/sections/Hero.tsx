@@ -75,7 +75,10 @@ export function Hero() {
       aria-roledescription="carousel"
       aria-label="Acustica moments"
     >
-      <GrainOverlay intensity="strong" className="relative min-h-[88svh] overflow-hidden">
+      <GrainOverlay
+        intensity="strong"
+        className="relative min-h-[calc(100svh-4rem)] overflow-hidden sm:min-h-[calc(100svh-4.25rem)]"
+      >
         <motion.div
           style={{ y: textureY }}
           className="pointer-events-none absolute inset-[-12%]"
@@ -114,7 +117,7 @@ export function Hero() {
           aria-hidden
         />
 
-        <div className="relative z-[2] mx-auto flex min-h-[88svh] max-w-6xl flex-col items-center justify-center px-5 py-16 sm:px-8 sm:py-24 lg:py-28">
+        <div className="relative z-[2] mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl flex-col items-center justify-center px-5 py-16 sm:min-h-[calc(100svh-4.25rem)] sm:px-8 sm:py-24 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
