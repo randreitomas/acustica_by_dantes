@@ -67,47 +67,103 @@ function MobileMenuStrip({
   label: string
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const jumpingRef = useRef(false)
+  const n = projects.length
 
-  const syncActive = useCallback(() => {
+  // Triple the strip so we can jump between identical sets unnoticed
+  const looped = [...projects, ...projects, ...projects]
+
+  const toReal = useCallback(
+    (flatIndex: number) => ((flatIndex % n) + n) % n,
+    [n]
+  )
+
+  const findCenteredIndex = useCallback(() => {
     const node = scrollerRef.current
-    if (!node) return
-    const slide = node.querySelector<HTMLElement>("[data-menu-slide]")
-    if (!slide) return
-    const slideWidth = slide.offsetWidth
-    const gap = 12
-    const index = Math.round(node.scrollLeft / (slideWidth + gap))
-    setActiveIndex(Math.max(0, Math.min(projects.length - 1, index)))
-  }, [projects.length])
+    if (!node) return 0
+    const slides = node.querySelectorAll<HTMLElement>("[data-menu-slide]")
+    if (!slides.length) return 0
+
+    const mid = node.getBoundingClientRect().left + node.clientWidth / 2
+    let best = 0
+    let bestDist = Number.POSITIVE_INFINITY
+
+    slides.forEach((slide, index) => {
+      const rect = slide.getBoundingClientRect()
+      const center = rect.left + rect.width / 2
+      const dist = Math.abs(center - mid)
+      if (dist < bestDist) {
+        bestDist = dist
+        best = index
+      }
+    })
+
+    return best
+  }, [])
+
+  const scrollToFlat = useCallback((flatIndex: number, behavior: ScrollBehavior) => {
+    const node = scrollerRef.current
+    const slide = node?.querySelectorAll<HTMLElement>("[data-menu-slide]")[flatIndex]
+    slide?.scrollIntoView({ behavior, inline: "center", block: "nearest" })
+  }, [])
+
+  // Start in the middle copy so users can swipe either direction forever
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      scrollToFlat(n, "auto")
+    })
+    return () => window.cancelAnimationFrame(id)
+  }, [n, scrollToFlat])
 
   useEffect(() => {
     const node = scrollerRef.current
-    if (!node) return
-    syncActive()
-    node.addEventListener("scroll", syncActive, { passive: true })
-    return () => node.removeEventListener("scroll", syncActive)
-  }, [syncActive])
+    if (!node || n === 0) return
 
-  const goTo = (index: number) => {
-    const node = scrollerRef.current
-    const slide = node?.querySelectorAll<HTMLElement>("[data-menu-slide]")[index]
-    slide?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
-  }
+    const normalizeIfNeeded = () => {
+      if (jumpingRef.current) return
+
+      const flat = findCenteredIndex()
+
+      // Seamlessly teleport when the user enters a cloned set
+      if (flat < n || flat >= n * 2) {
+        jumpingRef.current = true
+        scrollToFlat(n + toReal(flat), "auto")
+        window.requestAnimationFrame(() => {
+          jumpingRef.current = false
+        })
+      }
+    }
+
+    // Prefer scrollend so we jump after snap settles (smoother loop)
+    node.addEventListener("scrollend", normalizeIfNeeded)
+    // Fallback for browsers without scrollend
+    let settleTimer = 0
+    const onScrollFallback = () => {
+      window.clearTimeout(settleTimer)
+      settleTimer = window.setTimeout(normalizeIfNeeded, 120)
+    }
+    if (!("onscrollend" in window)) {
+      node.addEventListener("scroll", onScrollFallback, { passive: true })
+    }
+
+    return () => {
+      node.removeEventListener("scrollend", normalizeIfNeeded)
+      node.removeEventListener("scroll", onScrollFallback)
+      window.clearTimeout(settleTimer)
+    }
+  }, [findCenteredIndex, n, scrollToFlat, toReal])
 
   return (
     <div role="region" aria-roledescription="carousel" aria-label={label}>
       <div
         ref={scrollerRef}
-        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-[6vw] pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {/* Leading spacer so first card can center */}
-        <div className="w-[8vw] shrink-0 snap-none sm:w-0" aria-hidden />
-
-        {projects.map((project, index) => (
+        {looped.map((project, flatIndex) => (
           <div
-            key={project.id}
+            key={`${project.id}-${flatIndex}`}
             data-menu-slide
-            className="w-[78vw] max-w-[320px] shrink-0 snap-center"
+            className="w-[88vw] max-w-[380px] shrink-0 snap-center"
           >
             <div className="overflow-hidden rounded-sm border border-espresso/15 bg-[#efe3c8] shadow-[0_10px_28px_rgba(42,30,22,0.2)]">
               <img
@@ -117,7 +173,7 @@ function MobileMenuStrip({
                 height={1350}
                 className="h-auto w-full select-none"
                 draggable={false}
-                loading={index === 0 ? "eager" : "lazy"}
+                loading={flatIndex >= n && flatIndex < n * 2 ? "eager" : "lazy"}
                 decoding="async"
               />
             </div>
@@ -125,31 +181,6 @@ function MobileMenuStrip({
               {project.title}
             </p>
           </div>
-        ))}
-
-        <div className="w-[8vw] shrink-0 snap-none sm:w-0" aria-hidden />
-      </div>
-
-      <div
-        className="mt-5 flex justify-center gap-2"
-        role="tablist"
-        aria-label="Menu boards"
-      >
-        {projects.map((project, index) => (
-          <button
-            key={project.id}
-            type="button"
-            role="tab"
-            aria-selected={index === activeIndex}
-            aria-label={`Show ${project.title}`}
-            onClick={() => goTo(index)}
-            className={cn(
-              "h-2 rounded-sm transition-all duration-250",
-              index === activeIndex
-                ? "w-7 bg-mustard"
-                : "w-2 bg-espresso/25"
-            )}
-          />
         ))}
       </div>
     </div>
@@ -169,7 +200,7 @@ function DesktopMenuCarousel({
   const stageRef = useRef<HTMLDivElement>(null)
   const dragX = useMotionValue(0)
 
-  const { activeIndex, breakpoint, next, prev, goTo, getSlot, isVisible } =
+  const { breakpoint, next, prev, goTo, getSlot, isVisible } =
     useCarousel({ length: projects.length })
 
   useEffect(() => {
@@ -262,29 +293,6 @@ function DesktopMenuCarousel({
               )
             })}
           </motion.div>
-        </div>
-
-        <div
-          className="mt-4 flex justify-center gap-2"
-          role="tablist"
-          aria-label="Menu boards"
-        >
-          {projects.map((project, index) => (
-            <button
-              key={project.id}
-              type="button"
-              role="tab"
-              aria-selected={index === activeIndex}
-              aria-label={`Show ${project.title}`}
-              onClick={() => goTo(index)}
-              className={cn(
-                "h-2 rounded-sm transition-all duration-250",
-                index === activeIndex
-                  ? "w-7 bg-mustard"
-                  : "w-2 bg-espresso/25 hover:bg-espresso/40"
-              )}
-            />
-          ))}
         </div>
       </div>
     </div>
