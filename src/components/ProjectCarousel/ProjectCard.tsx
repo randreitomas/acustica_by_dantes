@@ -27,7 +27,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         alt={project.imageAlt ?? project.title}
         width={1080}
         height={1350}
-        className="pointer-events-none h-full w-full select-none object-contain object-center"
+        className="pointer-events-none h-full w-full select-none object-cover object-center"
         draggable={false}
         loading="lazy"
         decoding="async"
