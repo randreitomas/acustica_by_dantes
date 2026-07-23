@@ -28,33 +28,3 @@ export function Logo({ size = "md", className }: LogoProps) {
     </span>
   )
 }
-
-/** Parallel speed lines from the wordmark — for section accents */
-export function LogoRules({
-  className,
-  tone = "terracotta",
-}: {
-  className?: string
-  tone?: "terracotta" | "mustard" | "cream" | "espresso"
-}) {
-  const color =
-    tone === "mustard"
-      ? "bg-mustard"
-      : tone === "cream"
-        ? "bg-cream/70"
-        : tone === "espresso"
-          ? "bg-espresso/40"
-          : "bg-terracotta"
-
-  return (
-    <div
-      className={cn("flex w-28 flex-col gap-[3px]", className)}
-      aria-hidden
-    >
-      <span className={cn("h-px w-full", color)} />
-      <span className={cn("h-px w-[88%]", color)} />
-      <span className={cn("h-px w-[72%]", color)} />
-      <span className={cn("h-px w-[56%]", color)} />
-    </div>
-  )
-}

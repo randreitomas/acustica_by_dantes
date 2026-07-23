@@ -5,11 +5,9 @@ import { GrainOverlay } from "@/components/GrainOverlay"
 import { SectionHeading } from "@/components/SectionHeading"
 
 const hours = [
-  { day: "Monday – Wednesday", time: "1:00 PM – 10:00 PM" },
-  { day: "Thursday (Open Mic)", time: "1:00 PM – 12:00 AM" },
-  { day: "Friday", time: "1:00 PM – 11:00 PM" },
-  { day: "Saturday (Acoustic Night)", time: "1:00 PM – 12:00 AM" },
-  { day: "Sunday", time: "1:00 PM – 9:00 PM" },
+  { day: "Sunday", time: "3:00 PM – 1:00 AM" },
+  { day: "Monday – Tuesday", time: "11:00 AM – 1:00 AM" },
+  { day: "Wednesday – Saturday", time: "11:00 AM – 2:00 AM" },
 ] as const
 
 function FacebookIcon({ className }: { className?: string }) {
@@ -46,7 +44,7 @@ export function Contact() {
             tone="dark"
             eyebrow="Find Us"
             title="Contact & Location"
-            description="Espanya, Didache Building, 2nd Floor — look for the warm lights and the open door."
+            description="2nd Floor, Didache Building, #1508 España Blvd., Sampaloc, Manila — look for the warm lights and the open door."
           />
 
           <div className="grid gap-8 lg:grid-cols-2">
@@ -67,7 +65,7 @@ export function Contact() {
                   Map Placeholder
                 </p>
                 <p className="max-w-xs font-body text-sm text-cream/70">
-                  Interactive map embed goes here — Espanya, Didache Bldg, 2nd Floor
+                  Interactive map embed goes here — #1508 España Blvd., Sampaloc, Manila
                 </p>
               </div>
             </motion.div>
@@ -85,11 +83,11 @@ export function Contact() {
                   Address
                 </h3>
                 <p className="font-body text-base leading-relaxed text-cream">
-                  Acustica by Dantes
+                  Acustica Bistro
                   <br />
-                  Didache Building, 2nd Floor
+                  2nd Floor, Didache Building
                   <br />
-                  Espanya, Manila
+                  #1508 España Blvd., Sampaloc, Manila
                 </p>
               </div>
 
@@ -119,16 +117,16 @@ export function Contact() {
                 </h3>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/AcusticabyDantes/"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 font-body font-semibold text-xs uppercase tracking-[0.16em] text-mustard transition-colors hover:text-mustard-light"
                   >
                     <FacebookIcon className="size-4" />
-                    @acusticabydantes
+                    Facebook
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/acusticabydantes/"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 font-body font-semibold text-xs uppercase tracking-[0.16em] text-mustard transition-colors hover:text-mustard-light"

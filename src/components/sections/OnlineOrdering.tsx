@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 
 import { GrainOverlay } from "@/components/GrainOverlay"
-import { Logo, LogoRules } from "@/components/Logo"
+import { Logo } from "@/components/Logo"
 import { Button } from "@/components/ui/button"
 
 export function OnlineOrdering() {
@@ -18,11 +18,10 @@ export function OnlineOrdering() {
             <div className="mb-5 flex justify-center">
               <Logo size="sm" />
             </div>
-            <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-cream sm:text-3xl">
+            <h2 className="font-heading text-2xl font-semibold tracking-tight text-cream sm:text-3xl">
               Online Ordering
             </h2>
-            <LogoRules tone="cream" className="mx-auto mt-4" />
-            <p className="mx-auto mt-3 max-w-md font-body text-sm text-cream/85 sm:text-base">
+            <p className="mx-auto mt-3 max-w-md font-body text-sm font-normal text-cream/85 sm:text-base">
               Craving a cup from afar? Delivery partners are on the way —
               GrabFood and Foodpanda links coming soon.
             </p>

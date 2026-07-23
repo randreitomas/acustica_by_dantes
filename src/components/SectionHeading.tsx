@@ -1,7 +1,5 @@
 import { motion } from "framer-motion"
-import { Music2, Star } from "lucide-react"
 
-import { LogoRules } from "@/components/Logo"
 import { cn } from "@/lib/utils"
 
 type SectionHeadingProps = {
@@ -38,31 +36,25 @@ export function SectionHeading({
       {eyebrow ? (
         <p
           className={cn(
-            "mb-3 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.22em]",
+            "mb-3 font-caption text-xs font-normal uppercase tracking-[0.22em]",
             isDark ? "text-mustard-light" : "text-terracotta"
           )}
         >
-          <Star className="size-3 fill-current" aria-hidden />
           {eyebrow}
-          <Music2 className="size-3" aria-hidden />
         </p>
       ) : null}
       <h2
         className={cn(
-          "font-display text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-4xl",
+          "font-heading text-3xl font-semibold leading-tight tracking-tight sm:text-4xl",
           isDark ? "text-cream" : "text-espresso"
         )}
       >
         {title}
       </h2>
-      <LogoRules
-        tone={isDark ? "mustard" : "terracotta"}
-        className={cn("mt-4", align === "center" ? "mx-auto" : "mx-0")}
-      />
       {description ? (
         <p
           className={cn(
-            "mt-3 font-body text-base leading-relaxed",
+            "mt-3 font-body text-base font-normal leading-relaxed",
             isDark ? "text-cream/80" : "text-espresso-soft"
           )}
         >

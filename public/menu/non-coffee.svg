@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6e1f1f"/>
+      <stop offset="100%" stop-color="#d9b25f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <circle cx="640" cy="180" r="120" fill="#f5eedd" fill-opacity="0.08"/>
+  <circle cx="140" cy="820" r="180" fill="#f5eedd" fill-opacity="0.06"/>
+  <text x="400" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="120" fill="#f5eedd" fill-opacity="0.35">冷</text>
+  <text x="400" y="620" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#f5eedd">Non-Coffee</text>
+  <text x="400" y="680" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" letter-spacing="6" fill="#f5eedd" fill-opacity="0.7">ACUSTICA</text>
+</svg>

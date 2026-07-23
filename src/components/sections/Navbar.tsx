@@ -34,7 +34,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="group relative font-body text-xs font-semibold uppercase tracking-[0.18em] text-espresso-soft transition-colors hover:text-espresso"
+              className="group relative font-body text-xs font-medium uppercase tracking-[0.18em] text-espresso-soft transition-colors hover:text-espresso"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-mustard transition-all duration-250 group-hover:w-full" />
@@ -71,7 +71,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-3 font-body text-sm font-semibold uppercase tracking-[0.16em] text-espresso hover:bg-cream-dark"
+              className="rounded-md px-3 py-3 font-body text-sm font-medium uppercase tracking-[0.16em] text-espresso hover:bg-cream-dark"
               onClick={() => setOpen(false)}
             >
               {link.label}

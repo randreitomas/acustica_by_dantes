@@ -93,7 +93,7 @@ export function Gallery() {
                 decoding="async"
               />
               <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/75 to-transparent px-2.5 pb-2.5 pt-8 opacity-0 transition-opacity duration-250 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-cream">
+                <span className="font-poster text-sm uppercase tracking-[0.08em] text-cream">
                   {item.label}
                 </span>
               </span>

@@ -1,9 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { Mic2, Star } from "lucide-react"
 
 import { GrainOverlay } from "@/components/GrainOverlay"
-import { Logo, LogoRules } from "@/components/Logo"
+import { Logo } from "@/components/Logo"
 import { Button } from "@/components/ui/button"
 
 export function Hero() {
@@ -38,22 +37,18 @@ export function Hero() {
               <Logo size="lg" />
             </div>
 
-            <p className="mb-4 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.24em] text-espresso/80">
-              <Star className="size-3 fill-espresso" aria-hidden />
+            <p className="mb-4 font-caption text-xs font-normal uppercase tracking-[0.24em] text-espresso/80">
               Open Mic · Coffee · Community
-              <Mic2 className="size-3" aria-hidden />
             </p>
 
-            <h1 className="font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-espresso sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+            <h1 className="font-display text-4xl font-bold leading-[0.95] tracking-tight text-espresso sm:text-5xl md:text-6xl lg:text-[4.5rem]">
               Warm Lights.
               <br />
               Shared Songs.
             </h1>
 
-            <LogoRules tone="espresso" className="mx-auto my-5 lg:mx-0" />
-
-            <p className="mx-auto max-w-md font-body text-base leading-relaxed text-espresso-soft sm:text-lg lg:mx-0">
-              Acustica is an intimate open-mic venue and coffeehouse in Espanya —
+            <p className="mx-auto mt-5 max-w-md font-body text-base font-normal leading-relaxed text-espresso-soft sm:text-lg lg:mx-0">
+              Acustica is an intimate open-mic venue and coffeehouse on España —
               where local voices take the stage and the neighborhood stays awhile.
             </p>
 
@@ -80,8 +75,7 @@ export function Hero() {
                 aria-label="Performer on stage under warm amber light"
               >
                 <div className="flex h-full flex-col items-center justify-end gap-2 p-6 text-center">
-                  <Mic2 className="size-10 text-cream/70" aria-hidden />
-                  <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-cream/80">
+                  <p className="font-caption text-xs font-normal uppercase tracking-[0.2em] text-cream/80">
                     Live Stage Ambiance
                   </p>
                   <p className="font-accent text-lg italic text-mustard-light">
@@ -90,7 +84,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-3 -left-3 rounded-full border border-mustard/40 bg-espresso px-4 py-2 font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-cream shadow-soft">
+            <div className="absolute -bottom-3 -left-3 rounded-full border border-mustard/40 bg-espresso px-4 py-2 font-caption text-[0.65rem] font-normal uppercase tracking-[0.18em] text-cream shadow-soft">
               Thu · Sat Open Mic
             </div>
           </motion.div>

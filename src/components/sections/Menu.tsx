@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import {
   Beer,
   Coffee,
@@ -9,9 +9,11 @@ import {
   Wheat,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
+import { useState } from "react"
 
 import { SectionHeading } from "@/components/SectionHeading"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 type MenuItem = { name: string; price: string; detail?: string }
 
@@ -132,63 +134,84 @@ const menuSections: MenuSection[] = [
 ]
 
 export function Menu() {
+  const [activeTitle, setActiveTitle] = useState(menuSections[0].title)
+  const activeSection =
+    menuSections.find((section) => section.title === activeTitle) ??
+    menuSections[0]
+  const ActiveIcon = activeSection.icon
+
   return (
     <section id="menu" className="bg-cream-dark py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading
-          eyebrow="On Offer"
-          title="The Menu"
-          description="Bar chow, rice meals, pasta, coffee, and something cold for the set — made for sharing between songs."
-        />
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        <SectionHeading eyebrow="On Offer" title="The Menu" />
 
-        <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
-          {menuSections.map((section, sectionIndex) => (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.3,
-                delay: Math.min(sectionIndex * 0.05, 0.25),
-              }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <Card className="h-full grain-overlay">
-                <CardHeader className="relative z-[2]">
-                  <CardTitle className="flex items-center gap-2 font-menu-heading text-3xl font-normal normal-case tracking-normal text-terracotta sm:text-[2rem]">
-                    <section.icon className="size-5 shrink-0" aria-hidden />
-                    {section.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative z-[2]">
-                  <ul>
-                    {section.items.map((item, index) => (
-                      <li key={`${section.title}-${item.name}`}>
-                        {index > 0 ? <hr className="dotted-rule my-2.5" /> : null}
-                        <div className="flex items-baseline justify-between gap-4">
-                          <div className="min-w-0">
-                            <p className="font-menu-item text-base leading-snug text-espresso sm:text-lg">
-                              {item.name}
-                            </p>
-                            {item.detail ? (
-                              <p className="mt-0.5 font-menu-desc text-sm italic text-espresso-soft/80">
-                                {item.detail}
-                              </p>
-                            ) : null}
-                          </div>
-                          <p className="shrink-0 font-menu-item text-base font-bold text-maroon sm:text-lg">
-                            {item.price}
+        <nav
+          className="mb-6 flex flex-wrap justify-center gap-2"
+          aria-label="Menu categories"
+        >
+          {menuSections.map((section) => {
+            const isActive = section.title === activeTitle
+            return (
+              <button
+                key={section.title}
+                type="button"
+                onClick={() => setActiveTitle(section.title)}
+                aria-pressed={isActive}
+                className={cn(
+                  "rounded-md border px-3 py-2 font-body text-xs font-medium uppercase tracking-[0.14em] transition-colors",
+                  isActive
+                    ? "border-terracotta bg-terracotta text-cream"
+                    : "border-espresso/15 bg-cream text-espresso-soft hover:border-terracotta/40 hover:text-espresso"
+                )}
+              >
+                {section.title}
+              </button>
+            )
+          })}
+        </nav>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSection.title}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22 }}
+          >
+            <Card className="grain-overlay">
+              <CardHeader className="relative z-[2]">
+                <CardTitle className="flex items-center gap-2 font-heading text-2xl font-semibold tracking-tight text-terracotta sm:text-[1.75rem]">
+                  <ActiveIcon className="size-5 shrink-0" aria-hidden />
+                  {activeSection.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="relative z-[2]">
+                <ul>
+                  {activeSection.items.map((item, index) => (
+                    <li key={`${activeSection.title}-${item.name}`}>
+                      {index > 0 ? <hr className="dotted-rule my-2.5" /> : null}
+                      <div className="flex items-baseline justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className="font-body text-base font-normal leading-snug text-espresso sm:text-lg">
+                            {item.name}
                           </p>
+                          {item.detail ? (
+                            <p className="mt-0.5 font-caption text-sm font-normal text-espresso-soft/80">
+                              {item.detail}
+                            </p>
+                          ) : null}
                         </div>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                        <p className="shrink-0 font-body text-base font-medium text-maroon sm:text-lg">
+                          {item.price}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )

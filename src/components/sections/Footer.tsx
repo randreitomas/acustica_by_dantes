@@ -22,7 +22,7 @@ export function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-xs font-semibold uppercase tracking-[0.16em] text-cream/70 transition-colors hover:text-mustard"
+                className="font-body text-xs font-medium uppercase tracking-[0.16em] text-cream/70 transition-colors hover:text-mustard"
               >
                 {link.label}
               </a>
@@ -32,7 +32,7 @@ export function Footer() {
 
         <div className="my-8 h-px w-full bg-mustard/40" role="presentation" />
 
-        <p className="text-center font-body text-xs tracking-wide text-cream/55">
+        <p className="text-center font-caption text-xs font-normal tracking-wide text-cream/55">
           © {new Date().getFullYear()} Acustica by Dantes. All rights reserved.
         </p>
       </div>

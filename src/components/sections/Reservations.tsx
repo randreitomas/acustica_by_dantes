@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 
 import { GrainOverlay } from "@/components/GrainOverlay"
-import { Logo, LogoRules } from "@/components/Logo"
+import { Logo } from "@/components/Logo"
 import { Button } from "@/components/ui/button"
 
 export function Reservations() {
@@ -18,16 +18,15 @@ export function Reservations() {
             <div className="mb-6 flex justify-center">
               <Logo size="sm" />
             </div>
-            <p className="mb-4 font-body font-semibold text-xs uppercase tracking-[0.24em] text-mustard-light">
+            <p className="mb-4 font-caption font-normal text-xs uppercase tracking-[0.24em] text-mustard-light">
               Tables & Stage
             </p>
-            <h2 className="font-display text-3xl font-extrabold uppercase leading-tight tracking-tight text-cream sm:text-5xl">
+            <h2 className="font-heading text-3xl font-semibold leading-tight tracking-tight text-cream sm:text-5xl">
               Take a Seat
               <br />
               or Take the Stage
             </h2>
-            <LogoRules tone="mustard" className="mx-auto mt-5" />
-            <p className="mx-auto mt-4 max-w-lg font-body text-base text-cream/80">
+            <p className="mx-auto mt-4 max-w-lg font-body text-base font-normal text-cream/80">
               Reserve a table for open mic night, or put your name on the list —
               we&apos;ll leave the mic warm for you.
             </p>

@@ -20,15 +20,13 @@
   --color-rust: #a6432c;
 
   /* Typography — literal names so @fontsource faces resolve */
-  --font-display: "Plus Jakarta Sans", sans-serif;
-  --font-heading: "Oswald", sans-serif;
+  --font-display: "Cormorant Garamond", serif; /* H1 */
+  --font-heading: "Fraunces", serif; /* H2 */
+  --font-poster: "Bebas Neue", sans-serif; /* Event posters */
   --font-accent: "Cormorant Garamond", serif;
-  --font-script: "Cormorant Garamond", serif;
   --font-body: "Plus Jakarta Sans", sans-serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-menu-heading: "Allura", cursive;
-  --font-menu-item: "IM Fell English", "Alegreya", serif;
-  --font-menu-desc: "Cormorant Garamond", serif;
+  --font-caption: "Plus Jakarta Sans", sans-serif;
 
   /* Radius */
   --radius-sm: 4px;

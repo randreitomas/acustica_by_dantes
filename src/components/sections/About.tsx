@@ -21,13 +21,13 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.35 }}
-            className="max-w-xl font-body text-base leading-relaxed text-espresso-soft"
+            className="max-w-xl font-body text-base font-normal leading-relaxed text-espresso-soft"
           >
-            Up on the second floor of Didache Building in Espanya, we keep the lights warm
-            and the stage open. Regulars like John Ojacastro return week after week —
-            and so do first-timers with a song and a little courage. Between sets, coffee
-            cools slowly and conversations stretch. That&apos;s the point: a third place
-            where the community writes the soundtrack.
+            Up on the second floor of Didache Building along España Blvd. in Sampaloc,
+            we keep the lights warm and the stage open. Regulars like John Ojacastro
+            return week after week — and so do first-timers with a song and a little courage.
+            Between sets, coffee cools slowly and conversations stretch. That&apos;s the point:
+            a third place where the community writes the soundtrack.
           </motion.p>
           <p className="mt-6 font-accent text-2xl italic text-terracotta">
             Come for the coffee. Stay for the chorus.
@@ -49,7 +49,7 @@ export function About() {
                 aria-label="Warm portrait of a performer with guitar"
               >
                 <Guitar className="mb-3 size-12 text-cream/70" aria-hidden />
-                <p className="font-body font-semibold text-xs uppercase tracking-[0.2em] text-cream/75">
+                <p className="font-caption font-normal text-xs uppercase tracking-[0.2em] text-cream/75">
                   Portrait Placeholder
                 </p>
                 <p className="mt-1 font-accent text-lg italic text-mustard-light">

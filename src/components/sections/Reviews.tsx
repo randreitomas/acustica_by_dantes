@@ -6,25 +6,25 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const reviews = [
   {
-    name: "Mia R.",
-    initials: "MR",
+    name: "Mary Elaine Molina",
+    initials: "MM",
     quote:
-      "Thursday open mic feels like a living room with better coffee. Always leave humming something new.",
+      "The food is great. The service is great as well. Friendly and courteous staff. I really enjoyed their tapa. I highly recommend this place.",
     rating: 5,
   },
   {
-    name: "Carlo D.",
-    initials: "CD",
+    name: "Christian Als",
+    initials: "CA",
     quote:
-      "First time on stage and the crowd was kind. Acustica makes performing feel possible.",
+      "Solid lahat, accommodating mga crew and super solid ng banda! Babalik-balikan mo talaga 'to! Solid! Ganda ng mga crew UWU!!!",
     rating: 5,
   },
   {
-    name: "Jen & Paolo",
+    name: "Julius Pernia",
     initials: "JP",
     quote:
-      "Our go-to third place. Warm lights, honest cups, and a community that actually shows up.",
-    rating: 4,
+      "Great food, most especially their Acustica Signature Tapa.",
+    rating: 5,
   },
 ] as const
 
@@ -49,7 +49,7 @@ export function Reviews() {
         <SectionHeading
           eyebrow="Word of Mouth"
           title="What Regulars Say"
-          description="A handful of notes from the neighborhood — the kind you hear between sets."
+          description="Real notes from guests who've pulled up a chair — and come back for more."
         />
 
         <div className="grid gap-5 md:grid-cols-3">
@@ -64,14 +64,14 @@ export function Reviews() {
             >
               <Card className="h-full grain-overlay text-center">
                 <CardContent className="relative z-[2] flex h-full flex-col items-center gap-4 pt-6">
-                  <div className="flex size-12 items-center justify-center rounded-full border-2 border-mustard/50 bg-cream-dark font-body text-xs font-semibold uppercase tracking-wider text-espresso">
+                  <div className="flex size-12 items-center justify-center rounded-full border-2 border-mustard/50 bg-cream-dark font-caption text-xs font-normal uppercase tracking-wider text-espresso">
                     {review.initials}
                   </div>
                   <Stars count={review.rating} />
                   <blockquote className="font-accent text-xl italic leading-relaxed text-espresso-soft">
                     &ldquo;{review.quote}&rdquo;
                   </blockquote>
-                  <p className="mt-auto font-body text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
+                  <p className="mt-auto font-caption text-xs font-normal uppercase tracking-[0.16em] text-terracotta">
                     {review.name}
                   </p>
                 </CardContent>
