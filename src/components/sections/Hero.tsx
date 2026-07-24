@@ -95,14 +95,21 @@ export function Hero() {
             which is what made the hero read as flat/dark instead of warm.
             Lightened across the board so the photo's own warmth carries the
             section; the radial + vertical layers below still concentrate
-            the darkening behind the centered text for legibility. */}
+            the darkening behind the centered text for legibility.
+            Bottom stop softened further (0.74 → 0.58) — stacked with the
+            dedicated bottom vignette below, it was compounding into a
+            near-solid black slab right where the slide dots sit, which
+            read as a stray shadow bar cutting into the section beneath. */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(42,30,22,0.5)_0%,rgba(28,18,12,0.58)_42%,rgba(42,30,22,0.74)_100%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(42,30,22,0.42)_0%,rgba(28,18,12,0.5)_42%,rgba(42,30,22,0.58)_100%)]"
           aria-hidden
         />
-        {/* Warm terracotta bloom + text-legibility vignette, no stray maroon hue */}
+        {/* Warm terracotta bloom + text-legibility vignette, no stray maroon hue.
+            The bottom-focused layer is now tighter (26% spread, lower peak
+            opacity) so it stays a subtle contrast boost right behind the
+            dots instead of washing out a third of the photo to black. */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_45%,rgba(122,61,30,0.4),transparent_62%),radial-gradient(ellipse_at_center,transparent_34%,rgba(14,8,4,0.42)_100%),linear-gradient(0deg,rgba(20,12,8,0.32),transparent_38%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_45%,rgba(122,61,30,0.4),transparent_62%),radial-gradient(ellipse_at_center,transparent_34%,rgba(14,8,4,0.38)_100%),linear-gradient(0deg,rgba(20,12,8,0.2),transparent_26%)]"
           aria-hidden
         />
         <div
