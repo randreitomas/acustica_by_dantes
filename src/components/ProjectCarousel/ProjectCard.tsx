@@ -1,3 +1,5 @@
+import { motion } from "framer-motion"
+
 import { cn } from "@/lib/utils"
 
 export type ProjectCardData = {
@@ -11,6 +13,10 @@ type ProjectCardProps = {
   project: ProjectCardData
   isActive?: boolean
   className?: string
+  /** BRAND REFRESH: shared layoutId so the click-to-zoom lightbox morphs
+      out of this exact image instead of fading in as a disconnected
+      overlay. Only ever set on the currently-active/centered card. */
+  layoutId?: string
 }
 
 /**
@@ -18,7 +24,7 @@ type ProjectCardProps = {
  * BRAND REFRESH — Task 7: the lettering is baked into the board photo, audited
  * and kept as-is; see the comment in `sections/Menu.tsx` for the rationale.
  */
-export function ProjectCard({ project, className }: ProjectCardProps) {
+export function ProjectCard({ project, className, layoutId }: ProjectCardProps) {
   return (
     <article
       className={cn(
@@ -29,7 +35,8 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         className
       )}
     >
-      <img
+      <motion.img
+        layoutId={layoutId}
         src={project.image}
         alt={project.imageAlt ?? project.title}
         width={1080}

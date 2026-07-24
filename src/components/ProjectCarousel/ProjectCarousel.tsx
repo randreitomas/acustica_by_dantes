@@ -1,5 +1,6 @@
 import {
   animate,
+  LayoutGroup,
   motion,
   useMotionValue,
   type PanInfo,
@@ -8,9 +9,11 @@ import { useCallback, useEffect, useId, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 
+import { MenuLightbox } from "./MenuLightbox"
 import { ProjectCard, type ProjectCardData } from "./ProjectCard"
 import {
   CAROUSEL_DRAG_THRESHOLD,
+  menuLightboxLayoutId,
   useCarousel,
   type CarouselBreakpoint,
   type CarouselSlot,
@@ -62,13 +65,21 @@ function slotTransform(
 function MobileMenuStrip({
   projects,
   label,
+  onActiveClick,
 }: {
   projects: ProjectCardData[]
   label: string
+  onActiveClick: (project: ProjectCardData) => void
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const jumpingRef = useRef(false)
   const n = projects.length
+
+  // BRAND REFRESH: which flat slide is visually centered right now — kept
+  // live (not just computed on demand) so the centered clone can carry the
+  // lightbox `layoutId` continuously, giving framer-motion a stable "from"
+  // rect to morph out of the instant it's tapped.
+  const [centeredFlat, setCenteredFlat] = useState(n)
 
   // Triple the strip so we can jump between identical sets unnoticed
   const looped = [...projects, ...projects, ...projects]
@@ -111,6 +122,7 @@ function MobileMenuStrip({
   useEffect(() => {
     const id = window.requestAnimationFrame(() => {
       scrollToFlat(n, "auto")
+      setCenteredFlat(n)
     })
     return () => window.cancelAnimationFrame(id)
   }, [n, scrollToFlat])
@@ -127,10 +139,14 @@ function MobileMenuStrip({
       // Seamlessly teleport when the user enters a cloned set
       if (flat < n || flat >= n * 2) {
         jumpingRef.current = true
-        scrollToFlat(n + toReal(flat), "auto")
+        const target = n + toReal(flat)
+        scrollToFlat(target, "auto")
+        setCenteredFlat(target)
         window.requestAnimationFrame(() => {
           jumpingRef.current = false
         })
+      } else {
+        setCenteredFlat(flat)
       }
     }
 
@@ -146,10 +162,26 @@ function MobileMenuStrip({
       node.addEventListener("scroll", onScrollFallback, { passive: true })
     }
 
+    // BRAND REFRESH: also track centering continuously (not just once
+    // settled) so the `layoutId`-carrying slide is always the one that's
+    // actually visually centered, in case a tap lands mid-scroll.
+    let rafId = 0
+    const onScrollLive = () => {
+      if (rafId) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0
+        if (jumpingRef.current) return
+        setCenteredFlat(findCenteredIndex())
+      })
+    }
+    node.addEventListener("scroll", onScrollLive, { passive: true })
+
     return () => {
       node.removeEventListener("scrollend", normalizeIfNeeded)
       node.removeEventListener("scroll", onScrollFallback)
+      node.removeEventListener("scroll", onScrollLive)
       window.clearTimeout(settleTimer)
+      window.cancelAnimationFrame(rafId)
     }
   }, [findCenteredIndex, n, scrollToFlat, toReal])
 
@@ -170,8 +202,29 @@ function MobileMenuStrip({
                 what read as a solid dark band under the whole strip
                 instead of a soft per-card lift. Tightened and lightened
                 so it stays a subtle lift, not a band. */}
-            <div className="overflow-hidden rounded-sm border border-espresso/15 bg-cream shadow-[0_4px_14px_rgba(42,30,22,0.14)]">
-              <img
+            {/* BRAND REFRESH: tapping the already-centered board opens the
+                full-screen lightbox; tapping a peeking neighbor just
+                brings it to center first (mirrors the desktop "click to
+                advance" behavior) rather than immediately full-screening
+                whatever you brush against while swiping. */}
+            <button
+              type="button"
+              onClick={() => {
+                if (findCenteredIndex() === flatIndex) {
+                  onActiveClick(project)
+                } else {
+                  scrollToFlat(flatIndex, "smooth")
+                }
+              }}
+              aria-label={`${project.title} — view full size`}
+              className="block w-full overflow-hidden rounded-sm border border-espresso/15 bg-cream text-left shadow-[0_4px_14px_rgba(42,30,22,0.14)]"
+            >
+              <motion.img
+                layoutId={
+                  flatIndex === centeredFlat
+                    ? menuLightboxLayoutId(project.id)
+                    : undefined
+                }
                 src={project.image}
                 alt={project.imageAlt ?? project.title}
                 width={1080}
@@ -181,7 +234,7 @@ function MobileMenuStrip({
                 loading={flatIndex >= n && flatIndex < n * 2 ? "eager" : "lazy"}
                 decoding="async"
               />
-            </div>
+            </button>
           </div>
         ))}
       </div>
@@ -193,10 +246,12 @@ function DesktopMenuCarousel({
   projects,
   label,
   className,
+  onActiveClick,
 }: {
   projects: ProjectCardData[]
   label: string
   className?: string
+  onActiveClick: (project: ProjectCardData) => void
 }) {
   const regionId = useId()
   const stageRef = useRef<HTMLDivElement>(null)
@@ -274,7 +329,10 @@ function DesktopMenuCarousel({
               return (
                 <motion.div
                   key={project.id}
-                  className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                  className={cn(
+                    "absolute inset-0",
+                    isActive ? "cursor-zoom-in" : "cursor-grab active:cursor-grabbing"
+                  )}
                   style={{ transformStyle: "preserve-3d", zIndex: t.zIndex }}
                   initial={false}
                   animate={{
@@ -286,11 +344,21 @@ function DesktopMenuCarousel({
                   }}
                   transition={SPRING}
                   onClick={() => {
-                    if (!isActive) goTo(index)
+                    // BRAND REFRESH: clicking the already-centered board
+                    // now opens the full-screen lightbox instead of doing
+                    // nothing; side cards still just advance to center.
+                    if (isActive) onActiveClick(project)
+                    else goTo(index)
                   }}
                   aria-hidden={!isActive}
                 >
-                  <ProjectCard project={project} isActive={isActive} />
+                  <ProjectCard
+                    project={project}
+                    isActive={isActive}
+                    layoutId={
+                      isActive ? menuLightboxLayoutId(project.id) : undefined
+                    }
+                  />
                 </motion.div>
               )
             })}
@@ -313,6 +381,11 @@ export function ProjectCarousel({
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth < 640 : true
   )
+  // BRAND REFRESH: lifted here (not into each variant) so mobile and
+  // desktop share one lightbox instance instead of duplicating it.
+  const [lightboxProject, setLightboxProject] = useState<ProjectCardData | null>(
+    null
+  )
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 640)
@@ -323,19 +396,28 @@ export function ProjectCarousel({
 
   if (projects.length === 0) return null
 
-  if (isMobile) {
-    return (
-      <div className={cn("relative w-full", className)}>
-        <MobileMenuStrip projects={projects} label={label} />
-      </div>
-    )
-  }
-
   return (
-    <DesktopMenuCarousel
-      projects={projects}
-      label={label}
-      className={className}
-    />
+    <LayoutGroup>
+      {isMobile ? (
+        <div className={cn("relative w-full", className)}>
+          <MobileMenuStrip
+            projects={projects}
+            label={label}
+            onActiveClick={setLightboxProject}
+          />
+        </div>
+      ) : (
+        <DesktopMenuCarousel
+          projects={projects}
+          label={label}
+          className={className}
+          onActiveClick={setLightboxProject}
+        />
+      )}
+      <MenuLightbox
+        project={lightboxProject}
+        onClose={() => setLightboxProject(null)}
+      />
+    </LayoutGroup>
   )
 }

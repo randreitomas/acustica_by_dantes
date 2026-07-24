@@ -1,5 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 
+/**
+ * BRAND REFRESH — shared id so the clicked board and the lightbox's big
+ * image share a framer-motion `layoutId`: instead of the lightbox fading
+ * in as a disconnected overlay, it visually morphs out of the exact card
+ * the visitor tapped (only ever assigned to the currently-active/centered
+ * board so there's never a duplicate id mounted at once). Lives here
+ * (a plain-function module, not a component file) so it can be imported
+ * by ProjectCard, ProjectCarousel, and MenuLightbox without tripping
+ * fast-refresh's "only export components" lint rule or creating a
+ * circular dependency between those files.
+ */
+export function menuLightboxLayoutId(id: string) {
+  return `menu-board-${id}`
+}
+
 export type CarouselBreakpoint = "mobile" | "tablet" | "desktop"
 
 /** Relative slot of a card from the active index (-1 left, 0 center, 1 right). */
