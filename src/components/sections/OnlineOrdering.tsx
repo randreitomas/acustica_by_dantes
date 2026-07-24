@@ -40,8 +40,7 @@ export function OnlineOrdering() {
             <h2 className="font-heading text-xl font-semibold tracking-tight text-cream sm:text-2xl">
               Online Ordering
             </h2>
-            <hr className="ink-rule mx-auto my-3 w-24" />
-            <p className="mx-auto max-w-md font-body text-sm font-normal text-cream/85">
+            <p className="mx-auto mt-3 max-w-md font-body text-sm font-normal text-cream/85">
               {/* BRAND REFRESH: break after the dash intro so the line
                   doesn't reflow into an orphaned "soon." on its own line */}
               Delivery partners are on the way —
@@ -52,7 +51,7 @@ export function OnlineOrdering() {
               {partners.map((partner) => (
                 <div
                   key={partner.name}
-                  className="relative inline-flex min-w-[200px] cursor-not-allowed flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-cream/25 bg-espresso/30 px-5 py-5"
+                  className="relative inline-flex min-w-[200px] cursor-not-allowed flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-cream/25 bg-espresso/30 px-5 pb-5 pt-7"
                   aria-label={`${partner.name} — coming soon, pending confirmation`}
                 >
                   <img
@@ -64,7 +63,7 @@ export function OnlineOrdering() {
                     decoding="async"
                   />
                   <span
-                    className="pointer-events-none absolute -right-2 -top-2 inline-flex -rotate-6 items-center gap-1 rounded-sm border border-gold/50 bg-espresso px-2 py-1 font-caption text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-gold-light shadow-soft"
+                    className="pointer-events-none absolute -right-3 -top-3 inline-flex -rotate-6 items-center gap-1 rounded-sm border border-gold/50 bg-espresso px-2 py-1 font-caption text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-gold-light shadow-soft"
                     aria-hidden
                   >
                     <Clock className="size-2.5" />

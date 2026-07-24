@@ -162,15 +162,15 @@ export function Gallery() {
           title="The Feed"
           description={
             <>
-              {/* BRAND REFRESH: break after the dash intro (a short line
-                  on its own) instead of relying on natural reflow — that
-                  was landing mid-phrase on some widths and, combined with
-                  the old conditional <br>, was swallowing the space before
-                  "and", gluing it to "nights,". */}
-              Real flyers from the wall —
-              <br />
-              open mics, acoustic nights, and the holidays we celebrate
-              together.
+              {/* BRAND REFRESH: desktop gets an intentional break after
+                  "nights," (reads as two balanced clauses); mobile relies
+                  on natural reflow since the line is short enough there.
+                  Using string literals (not raw JSX text around the <br>)
+                  so the leading space on the second half can never get
+                  silently trimmed and glue "nights," to "and". */}
+              {"Real flyers from the wall — open mics, acoustic nights,"}
+              <br className="hidden sm:block" />
+              {" and the holidays we celebrate together."}
             </>
           }
         />
