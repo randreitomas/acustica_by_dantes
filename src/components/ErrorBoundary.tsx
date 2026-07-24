@@ -21,8 +21,9 @@ export class ErrorBoundary extends Component<Props, State> {
           style={{
             minHeight: "100svh",
             padding: "2rem",
-            background: "#F5EEDD",
-            color: "#2E2118",
+            // BRAND REFRESH: use the locked palette vars instead of one-off hex
+            background: "var(--color-cream)",
+            color: "var(--color-espresso)",
             fontFamily: "system-ui, sans-serif",
           }}
         >
@@ -32,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <pre
             style={{
               whiteSpace: "pre-wrap",
-              background: "#EDE1C9",
+              background: "var(--color-cream-dark)",
               padding: "1rem",
               borderRadius: 8,
               fontSize: 13,

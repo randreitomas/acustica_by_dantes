@@ -44,7 +44,7 @@ export function Navbar() {
                   className="group relative rounded-sm px-2.5 py-2 font-body text-[0.7rem] font-medium uppercase tracking-[0.16em] text-espresso-soft transition-colors hover:text-terracotta"
                 >
                   {link.label}
-                  <span className="pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] origin-left scale-x-0 bg-mustard transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                  <span className="pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] origin-left scale-x-0 bg-gold transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -52,7 +52,7 @@ export function Navbar() {
 
           <a
             href={orderLink.href}
-            className="btn-print ml-5 inline-flex h-9 items-center rounded-sm border border-espresso/15 bg-mustard px-4 font-body text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-espresso transition-colors hover:bg-terracotta hover:text-cream"
+            className="btn-print ml-5 inline-flex h-9 items-center rounded-sm border border-espresso/15 bg-gold px-4 font-body text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-espresso transition-colors hover:bg-terracotta hover:text-cream"
           >
             {orderLink.label}
           </a>
@@ -60,7 +60,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-sm border border-espresso/20 bg-cream/50 text-espresso transition-colors hover:border-mustard/60 hover:bg-mustard/20 lg:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-sm border border-espresso/20 bg-cream/50 text-espresso transition-colors hover:border-gold/60 hover:bg-gold/20 lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -73,7 +73,7 @@ export function Navbar() {
       <div
         id="mobile-nav"
         className={cn(
-          "border-t border-espresso/15 bg-[#efe3c8]/98 lg:hidden",
+          "border-t border-espresso/15 bg-cream/98 lg:hidden",
           open ? "block" : "hidden"
         )}
       >
@@ -93,7 +93,7 @@ export function Navbar() {
           ))}
           <a
             href={orderLink.href}
-            className="btn-print mt-3 mb-1 inline-flex h-11 items-center justify-center rounded-sm border border-espresso/15 bg-mustard font-body text-xs font-semibold uppercase tracking-[0.14em] text-espresso transition-colors hover:bg-terracotta hover:text-cream"
+            className="btn-print mt-3 mb-1 inline-flex h-11 items-center justify-center rounded-sm border border-espresso/15 bg-gold font-body text-xs font-semibold uppercase tracking-[0.14em] text-espresso transition-colors hover:bg-terracotta hover:text-cream"
             onClick={() => setOpen(false)}
           >
             {orderLink.label}

@@ -35,7 +35,7 @@ function Stars({ count }: { count: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={`size-4 ${i < count ? "fill-mustard text-mustard" : "text-cream/25"}`}
+          className={`size-4 ${i < count ? "fill-gold text-gold" : "text-cream/25"}`}
           aria-hidden
         />
       ))}
@@ -43,9 +43,11 @@ function Stars({ count }: { count: number }) {
   )
 }
 
+// BRAND REFRESH: was bg-maroon (unrelated one-off hue) — now a terracotta
+// tint, unifying with the Online Ordering section under one accent family
 export function Reviews() {
   return (
-    <section id="reviews" className="bg-maroon">
+    <section id="reviews" className="bg-terracotta-dark">
       <GrainOverlay intensity="strong">
         <div className="relative z-[2] mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <SectionHeading
@@ -66,7 +68,7 @@ export function Reviews() {
               >
                 <Card className="h-full border-cream/15 bg-cream/95 text-center shadow-lift">
                   <CardContent className="flex h-full flex-col items-center gap-4 pt-6">
-                    <div className="flex size-12 items-center justify-center rounded-full border border-mustard/60 bg-cream-stain/50 font-caption text-xs font-normal uppercase tracking-wider text-espresso">
+                    <div className="flex size-12 items-center justify-center rounded-full border border-gold/60 bg-cream-stain/50 font-caption text-xs font-normal uppercase tracking-wider text-espresso">
                       {review.initials}
                     </div>
                     <Stars count={review.rating} />

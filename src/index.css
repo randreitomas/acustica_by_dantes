@@ -1,16 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors — muted, paper-aged vintage mode */
-  --color-mustard: #c08f32;
-  --color-mustard-light: #d4a84a;
-  --color-terracotta: #a85728;
-  --color-terracotta-dark: #8f4620;
-  --color-maroon: #5f1b1b;
-  --color-maroon-dark: #421010;
-  --color-espresso: #2a1e16;
-  --color-espresso-soft: #3d2c20;
+  /* BRAND REFRESH — Task 1: locked 4-color system.
+     Every background/accent on the site must resolve to one of these four
+     hues. Anything else below (light/dark/soft/stain) is a *tint* of one
+     of these four — never an independent, one-off color. */
   --color-cream: #efe4cc;
+  --color-espresso: #2a1e16;
+  --color-gold: #c08f32;
+  --color-terracotta: #a85728;
+
+  /* BRAND REFRESH — tints derived from the locked palette above.
+     `terracotta-dark` replaces the old, unrelated `maroon` used only by
+     the testimonials section; it is a shade of --color-terracotta, not a
+     separate hue, so testimonials and ordering now share one accent family. */
+  --color-gold-light: #d4a84a;
+  --color-terracotta-dark: #7a3d1e;
+  --color-espresso-soft: #3d2c20;
   --color-cream-dark: #e4d5b8;
   --color-cream-stain: #d4bf98;
 
@@ -18,10 +24,10 @@
   --font-display: "Cormorant Garamond", serif; /* Headings / H1 */
   --font-heading: "Cormorant Garamond", serif; /* Headings / H2 */
   --font-accent: "Cormorant Garamond", serif; /* Italic quotes */
-  --font-body: "Plus Jakarta Sans", sans-serif; /* Body */
-  --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-caption: "Plus Jakarta Sans", sans-serif; /* Captions */
-  --font-price: "Plus Jakarta Sans", sans-serif; /* Menu prices (Medium) */
+  --font-body: "Jost", sans-serif; /* Body */
+  --font-sans: "Jost", sans-serif;
+  --font-caption: "Jost", sans-serif; /* Captions */
+  --font-price: "Jost", sans-serif; /* Menu prices (Medium) */
 
   --radius-sm: 3px;
   --radius-md: 6px;
@@ -43,12 +49,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Jost", sans-serif;
   }
 
   body {
     margin: 0;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Jost", sans-serif;
     color: var(--color-espresso);
     background-color: var(--color-cream-dark);
     -webkit-font-smoothing: antialiased;
@@ -58,11 +64,11 @@
   #root {
     min-height: 100svh;
     width: 100%;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Jost", sans-serif;
   }
 
   ::selection {
-    background-color: var(--color-mustard);
+    background-color: var(--color-gold);
     color: var(--color-espresso);
   }
 

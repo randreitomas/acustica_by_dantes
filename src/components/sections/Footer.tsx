@@ -25,7 +25,7 @@ export function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="font-caption text-xs font-medium uppercase tracking-[0.16em] text-cream/70 transition-colors hover:text-mustard"
+                  className="font-caption text-xs font-medium uppercase tracking-[0.16em] text-cream/70 transition-colors hover:text-gold"
                 >
                   {link.label}
                 </a>

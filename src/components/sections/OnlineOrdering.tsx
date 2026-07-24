@@ -15,6 +15,8 @@ const partners = [
 
 export function OnlineOrdering() {
   return (
+    // BRAND REFRESH: unified with Reviews under the terracotta family (was the
+    // odd-one-out "orange" section; now shares the same locked accent color)
     <section id="ordering" className="bg-terracotta">
       <GrainOverlay intensity="strong">
         <div className="relative z-[2] mx-auto max-w-3xl px-5 py-14 text-center sm:px-8 sm:py-16">

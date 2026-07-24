@@ -88,7 +88,7 @@ export function Gallery() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.28, delay: (index % 6) * 0.04 }}
               whileHover={{ scale: 1.02 }}
-              className="aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
+              className="aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               aria-label={item.alt}
             >
               <img

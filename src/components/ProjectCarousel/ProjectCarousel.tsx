@@ -165,7 +165,7 @@ function MobileMenuStrip({
             data-menu-slide
             className="w-[88vw] max-w-[380px] shrink-0 snap-center"
           >
-            <div className="overflow-hidden rounded-sm border border-espresso/15 bg-[#efe3c8] shadow-[0_10px_28px_rgba(42,30,22,0.2)]">
+            <div className="overflow-hidden rounded-sm border border-espresso/15 bg-cream shadow-[0_10px_28px_rgba(42,30,22,0.2)]">
               <img
                 src={project.image}
                 alt={project.imageAlt ?? project.title}
@@ -243,7 +243,7 @@ function DesktopMenuCarousel({
         aria-roledescription="carousel"
         aria-label={label}
         tabIndex={0}
-        className="relative outline-none focus-visible:ring-2 focus-visible:ring-mustard/50 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
+        className="relative outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
       >
         <div
           className="relative mx-auto flex w-full max-w-5xl items-center justify-center px-4 py-2"

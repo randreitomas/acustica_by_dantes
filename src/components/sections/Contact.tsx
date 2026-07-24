@@ -58,22 +58,27 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.35 }}
             >
+              {/* BRAND REFRESH: added a visible gold "mat" frame around the map
+                  so the light map art doesn't bleed straight into the dark
+                  espresso section background */}
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group block overflow-hidden rounded-sm border border-cream/15 bg-espresso-soft shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard"
+                className="group block rounded-md border border-gold/45 bg-espresso-soft p-2 shadow-lift transition-colors hover:border-gold/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:p-3"
                 aria-label="Open Acustica By Dantes on Google Maps"
               >
-                <img
-                  src={mapPlaceholder}
-                  alt="Map showing Acustica By Dantes on España Blvd near UST, Sampaloc, Manila"
-                  width={1024}
-                  height={695}
-                  className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.02]"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="overflow-hidden rounded-sm border border-cream/20">
+                  <img
+                    src={mapPlaceholder}
+                    alt="Map showing Acustica By Dantes on España Blvd near UST, Sampaloc, Manila"
+                    width={1024}
+                    height={695}
+                    className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </a>
             </motion.div>
 
@@ -85,7 +90,7 @@ export function Contact() {
               className="flex flex-col justify-center gap-8"
             >
               <div>
-                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-gold">
                   <MapPin className="size-4" aria-hidden />
                   Address
                 </h3>
@@ -99,47 +104,47 @@ export function Contact() {
               </div>
 
               <div>
-                <h3 className="mb-3 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-gold">
                   Reach Us
                 </h3>
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-3">
                   <a
                     href="tel:+639554937058"
-                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-gold"
                   >
-                    <Phone className="size-4 shrink-0 text-mustard" aria-hidden />
+                    <Phone className="size-4 shrink-0 text-gold" aria-hidden />
                     0955 493 7058
                   </a>
                   <a
                     href="mailto:acusticabistro@gmail.com"
-                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-gold"
                   >
-                    <Mail className="size-4 shrink-0 text-mustard" aria-hidden />
+                    <Mail className="size-4 shrink-0 text-gold" aria-hidden />
                     acusticabistro@gmail.com
                   </a>
                   <a
                     href="https://www.facebook.com/AcusticabyDantes/"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-gold"
                   >
-                    <FacebookIcon className="size-4 shrink-0 text-mustard" />
+                    <FacebookIcon className="size-4 shrink-0 text-gold" />
                     Facebook
                   </a>
                   <a
                     href="https://www.instagram.com/acusticabydantes/"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-mustard"
+                    className="inline-flex items-center gap-2 font-body text-base text-cream transition-colors hover:text-gold"
                   >
-                    <InstagramIcon className="size-4 shrink-0 text-mustard" />
+                    <InstagramIcon className="size-4 shrink-0 text-gold" />
                     Instagram
                   </a>
                 </div>
               </div>
 
               <div>
-                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-mustard">
+                <h3 className="mb-3 flex items-center gap-2 font-caption font-semibold text-sm uppercase tracking-[0.18em] text-gold">
                   <Clock className="size-4" aria-hidden />
                   Hours
                 </h3>
