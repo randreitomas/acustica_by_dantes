@@ -81,11 +81,19 @@ function FeedCard({
   item,
   featured = false,
   pinnedCaption = false,
+  trailingOdd = false,
   delay = 0,
 }: {
   item: FeedItem
   featured?: boolean
   pinnedCaption?: boolean
+  /* BRAND REFRESH — mobile gap fix: when a row-group (supporting/overflow)
+     has an odd item count, the last card would otherwise sit alone in a
+     2-col mobile row, leaving an awkward empty cell beside it. This spans
+     the full row on mobile but caps its own width back down to a normal
+     card size and centers it, so it reads as "one more flyer" rather than
+     a second featured tile. Resets to normal single-column behavior at sm+. */
+  trailingOdd?: boolean
   delay?: number
 }) {
   return (
@@ -100,7 +108,9 @@ function FeedCard({
       whileHover={{ scale: 1.02 }}
       className={cn(
         "aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
-        featured && "col-span-2 sm:row-span-2"
+        featured && "col-span-2 sm:row-span-2",
+        trailingOdd &&
+          "col-span-2 mx-auto max-w-[calc(50%-0.25rem)] sm:col-span-1 sm:mx-0 sm:max-w-none"
       )}
       aria-label={item.alt}
     >
@@ -152,12 +162,15 @@ export function Gallery() {
           title="The Feed"
           description={
             <>
-              Real flyers from the wall — open mics, acoustic nights,
-              {/* BRAND REFRESH: hard break only kicks in once there's room;
-                  on mobile it was forcing "nights," right up against the
-                  edge, making it look cut off */}
-              <br className="hidden sm:block" />
-              and the holidays we celebrate together.
+              {/* BRAND REFRESH: break after the dash intro (a short line
+                  on its own) instead of relying on natural reflow — that
+                  was landing mid-phrase on some widths and, combined with
+                  the old conditional <br>, was swallowing the space before
+                  "and", gluing it to "nights,". */}
+              Real flyers from the wall —
+              <br />
+              open mics, acoustic nights, and the holidays we celebrate
+              together.
             </>
           }
         />
@@ -170,6 +183,9 @@ export function Gallery() {
               item={item}
               delay={(index + 1) * 0.04}
               pinnedCaption={pinnedLabels.has(item.label)}
+              trailingOdd={
+                supporting.length % 2 === 1 && index === supporting.length - 1
+              }
             />
           ))}
         </div>
@@ -179,7 +195,14 @@ export function Gallery() {
             {showAll ? (
               <div className="mt-2 grid grid-cols-2 gap-2 sm:mt-3 sm:grid-cols-3 sm:gap-3">
                 {overflow.map((item, index) => (
-                  <FeedCard key={item.label} item={item} delay={index * 0.04} />
+                  <FeedCard
+                    key={item.label}
+                    item={item}
+                    delay={index * 0.04}
+                    trailingOdd={
+                      overflow.length % 2 === 1 && index === overflow.length - 1
+                    }
+                  />
                 ))}
               </div>
             ) : null}

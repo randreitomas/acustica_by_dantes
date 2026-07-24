@@ -42,7 +42,11 @@ export function OnlineOrdering() {
             </h2>
             <hr className="ink-rule mx-auto my-3 w-24" />
             <p className="mx-auto max-w-md font-body text-sm font-normal text-cream/85">
-              Delivery partners are on the way — GrabFood and foodpanda coming soon.
+              {/* BRAND REFRESH: break after the dash intro so the line
+                  doesn't reflow into an orphaned "soon." on its own line */}
+              Delivery partners are on the way —
+              <br />
+              GrabFood and foodpanda coming soon.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               {partners.map((partner) => (
