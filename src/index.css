@@ -237,8 +237,12 @@
       radial-gradient(ellipse at center, transparent 55%, rgba(42, 30, 22, 0.18) 100%);
   }
 
+  /* BRAND REFRESH — Task 2: was brightness(0.88), which darkened photos
+     that were already moderate-key (e.g. indoor night shots), compounding
+     with the hero's dark overlay to read as flat/low-contrast. Lightened
+     and softened so the warm grade reads as "warm film," not "underlit." */
   .duotone-warm {
-    filter: sepia(0.62) saturate(0.72) brightness(0.88) contrast(1.12) hue-rotate(-6deg);
+    filter: sepia(0.5) saturate(0.82) brightness(0.98) contrast(1.08) hue-rotate(-4deg);
   }
 
   /* Ink-bleed divider */
@@ -283,5 +287,32 @@
       inset 0 1px 0 rgba(255, 248, 230, 0.2),
       0 1px 0 rgba(42, 30, 22, 0.18),
       0 2px 6px rgba(42, 30, 22, 0.18);
+  }
+
+  /* BRAND REFRESH — Contact Fix 2: dot-leader connector for the Hours
+     table, echoing the vintage menu board's spaced dots between an item
+     and its price. Pure CSS (flex + border-bottom dotted) instead of
+     literal "." characters, so it reflows at any column width. */
+  .hours-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .hours-row .day {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: baseline;
+  }
+
+  .hours-row .day::after {
+    content: "";
+    flex: 1;
+    align-self: center;
+    border-bottom: 1px dotted var(--color-gold);
+    margin: 0 8px;
+    opacity: 0.5;
   }
 }

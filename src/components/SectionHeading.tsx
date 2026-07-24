@@ -9,6 +9,10 @@ type SectionHeadingProps = {
   description?: ReactNode
   align?: "left" | "center"
   tone?: "light" | "dark"
+  /* BRAND REFRESH — Task 3: "feature" gives a section's headline extra
+     visual weight (e.g. Our Story) without changing the default scale
+     used everywhere else on the site. */
+  size?: "default" | "feature"
   className?: string
 }
 
@@ -18,9 +22,11 @@ export function SectionHeading({
   description,
   align = "center",
   tone = "light",
+  size = "default",
   className,
 }: SectionHeadingProps) {
   const isDark = tone === "dark"
+  const isFeature = size === "feature"
 
   return (
     <motion.div
@@ -46,7 +52,8 @@ export function SectionHeading({
       ) : null}
       <h2
         className={cn(
-          "font-heading text-3xl font-semibold leading-tight tracking-tight sm:text-4xl",
+          "font-heading font-semibold leading-tight tracking-tight",
+          isFeature ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl",
           isDark ? "text-cream" : "text-espresso"
         )}
       >
@@ -55,7 +62,8 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "mt-4 font-body text-base font-normal leading-relaxed",
+            "font-body font-normal leading-relaxed",
+            isFeature ? "mt-5 text-lg sm:text-xl" : "mt-4 text-base",
             isDark ? "text-cream/80" : "text-espresso-soft"
           )}
         >

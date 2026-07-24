@@ -1,6 +1,19 @@
 import { ProjectCarousel, type ProjectCardData } from "@/components/ProjectCarousel"
 import { SectionHeading } from "@/components/SectionHeading"
 
+/* BRAND REFRESH — Task 7: typography audit.
+   The "cocktails" / "coffee" / "non-coffee" lettering visible on these
+   boards is baked into the flattened board photos themselves (a script
+   display face + italic serif for line items) — it isn't live HTML/CSS
+   text, so it can't be restyled from here, and there's no source file to
+   re-typeset. Verdict: keep as intentional texture, not a bug. It reads
+   as an actual handwritten specials board (matches the "handcrafted,
+   well-worn" brief) and mirrors the same choice already made for the real
+   event flyers in The Feed. The section chrome around it — this "Menu"
+   heading, the "On Offer" eyebrow, and the nav/footer "Menu" link — all
+   use the core Cormorant Garamond / Jost pairing, so the divergence stays
+   isolated to the photographed boards and doesn't leak into our own UI. */
+
 import barChow from "@/assets/menu/bar-chow.png"
 import cocktails from "@/assets/menu/cocktails.png"
 import coffee from "@/assets/menu/coffee.png"

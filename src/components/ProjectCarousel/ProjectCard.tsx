@@ -13,7 +13,11 @@ type ProjectCardProps = {
   className?: string
 }
 
-/** Menu board slide at native 1080×1350 (4:5) — full board visible, no overlays. */
+/**
+ * Menu board slide at native 1080×1350 (4:5) — full board visible, no overlays.
+ * BRAND REFRESH — Task 7: the lettering is baked into the board photo, audited
+ * and kept as-is; see the comment in `sections/Menu.tsx` for the rationale.
+ */
 export function ProjectCard({ project, className }: ProjectCardProps) {
   return (
     <article

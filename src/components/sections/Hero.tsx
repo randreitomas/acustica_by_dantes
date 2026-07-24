@@ -7,25 +7,26 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 import hero01 from "@/assets/hero/01-bar-crew.png"
-import hero02 from "@/assets/hero/02-table-group.png"
 import hero03 from "@/assets/hero/03-guitarist.png"
 import hero04 from "@/assets/hero/04-celebration.png"
 import hero05 from "@/assets/hero/05-friends.png"
-import hero06 from "@/assets/hero/06-dinner.png"
-import hero07 from "@/assets/hero/07-window-lounge.png"
 
+/* BRAND REFRESH — Task 2: hero image rebuild.
+   Leads with the live-performance/guitar shot (warm practical lighting,
+   solo performer mid-song) instead of the old lead image of a group
+   staring at a table lit by cold overhead light. Two shots that read as
+   "crowd on phones" (table-group, dinner) and one cool/blue night shot
+   (window-lounge) were dropped from the rotation entirely — the remaining
+   four are all warm, lively, and on-brand. Files are left on disk in case
+   they're wanted elsewhere later. */
 const slides = [
+  {
+    src: hero03,
+    alt: "A guitarist performing live at Acustica, mic and guitar under warm light",
+  },
   {
     src: hero01,
     alt: "The Acustica crew laughing behind the bar",
-  },
-  {
-    src: hero02,
-    alt: "Friends gathered around a table during an open mic night",
-  },
-  {
-    src: hero03,
-    alt: "A guitarist performing live at Acustica",
   },
   {
     src: hero04,
@@ -34,14 +35,6 @@ const slides = [
   {
     src: hero05,
     alt: "Friends smiling together at Acustica",
-  },
-  {
-    src: hero06,
-    alt: "A shared meal around the table at Acustica",
-  },
-  {
-    src: hero07,
-    alt: "Friends talking by the window lounge at Acustica",
   },
 ] as const
 
@@ -98,16 +91,18 @@ export function Hero() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Dark contrast wash — amber film + deep vignette */}
+        {/* BRAND REFRESH — Task 2: the old wash pushed opacity up to 0.9,
+            which is what made the hero read as flat/dark instead of warm.
+            Lightened across the board so the photo's own warmth carries the
+            section; the radial + vertical layers below still concentrate
+            the darkening behind the centered text for legibility. */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(42,30,22,0.72)_0%,rgba(28,18,12,0.78)_42%,rgba(42,30,22,0.9)_100%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(160deg,rgba(42,30,22,0.5)_0%,rgba(28,18,12,0.58)_42%,rgba(42,30,22,0.74)_100%)]"
           aria-hidden
         />
-        {/* BRAND REFRESH: warm vignette was tinted with a stray maroon rgba
-            (95,27,27) — now uses --color-terracotta-dark's rgb so the hero
-            wash matches the locked palette instead of a one-off hue */}
+        {/* Warm terracotta bloom + text-legibility vignette, no stray maroon hue */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_35%,rgba(122,61,30,0.32),transparent_58%),radial-gradient(ellipse_at_center,transparent_40%,rgba(14,8,4,0.55)_100%),linear-gradient(0deg,rgba(20,12,8,0.5),transparent_42%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_45%,rgba(122,61,30,0.4),transparent_62%),radial-gradient(ellipse_at_center,transparent_34%,rgba(14,8,4,0.42)_100%),linear-gradient(0deg,rgba(20,12,8,0.32),transparent_38%)]"
           aria-hidden
         />
         <div
