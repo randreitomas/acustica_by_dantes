@@ -22,7 +22,10 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
   return (
     <article
       className={cn(
-        "relative h-full w-full overflow-hidden rounded-sm shadow-[0_14px_36px_rgba(42,30,22,0.28)]",
+        // BRAND REFRESH: softened alongside the mobile strip's shadow —
+        // 0.28 opacity / 36px blur read as a heavy modern glossy shadow,
+        // not the subtle lift the vintage aesthetic calls for.
+        "relative h-full w-full overflow-hidden rounded-sm shadow-[0_8px_20px_rgba(42,30,22,0.18)]",
         className
       )}
     >

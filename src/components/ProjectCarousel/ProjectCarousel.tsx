@@ -165,7 +165,12 @@ function MobileMenuStrip({
             data-menu-slide
             className="w-[88vw] max-w-[380px] shrink-0 snap-center"
           >
-            <div className="overflow-hidden rounded-sm border border-espresso/15 bg-cream shadow-[0_10px_28px_rgba(42,30,22,0.2)]">
+            {/* BRAND REFRESH: shadow was 0_10px_28px @ 0.2 opacity — with 3
+                cards peeking side by side, their shadows overlapped into
+                what read as a solid dark band under the whole strip
+                instead of a soft per-card lift. Tightened and lightened
+                so it stays a subtle lift, not a band. */}
+            <div className="overflow-hidden rounded-sm border border-espresso/15 bg-cream shadow-[0_4px_14px_rgba(42,30,22,0.14)]">
               <img
                 src={project.image}
                 alt={project.imageAlt ?? project.title}
