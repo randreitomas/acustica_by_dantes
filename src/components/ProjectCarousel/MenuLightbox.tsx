@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import { useEffect } from "react"
+import { createPortal } from "react-dom"
 
 import type { ProjectCardData } from "./ProjectCard"
 import { menuLightboxLayoutId } from "./useCarousel"
@@ -24,10 +25,17 @@ const LIGHTBOX_SPRING = {
  * as an abrupt swap rather than a "zoom." This version shares a
  * framer-motion `layoutId` with the exact card that was tapped (see
  * ProjectCard / the mobile strip in ProjectCarousel.tsx), so the board
- * itself visibly morphs from its small on-page size up to this larger-but-
- * still-modest size — a real "zoom in a little," not a jump-cut. The rest
- * of the page dims and softly blurs behind it so the board reads as the
- * only thing in focus, without going full black.
+ * itself visibly morphs from its small on-page size up to near-fullscreen —
+ * a real "zoom," not a jump-cut. The rest of the page dims and softly
+ * blurs behind it so the board reads as the only thing in focus.
+ *
+ * v3: this was still mounted inside the Menu section's `overflow-hidden`
+ * wrapper (needed to contain the 3D carousel's side cards). Turns out
+ * `overflow: hidden` on an ancestor clips `position: fixed` descendants
+ * too, not just normally-flowed ones — so the dim/blur backdrop was only
+ * ever painted within the Menu section's box, letting Hero/Our Story show
+ * through above and below it instead of the whole viewport dimming.
+ * Portaling straight to `document.body` escapes that clipping entirely.
  */
 export function MenuLightbox({ project, onClose }: MenuLightboxProps) {
   useEffect(() => {
@@ -47,7 +55,7 @@ export function MenuLightbox({ project, onClose }: MenuLightboxProps) {
     }
   }, [project, onClose])
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {project ? (
         <motion.div
@@ -84,7 +92,7 @@ export function MenuLightbox({ project, onClose }: MenuLightboxProps) {
               transition={LIGHTBOX_SPRING}
               src={project.image}
               alt={project.imageAlt ?? project.title}
-              className="max-h-[62vh] w-auto max-w-[85vw] rounded-sm border border-cream/15 object-contain shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:max-h-[72vh] sm:max-w-[460px]"
+              className="max-h-[82vh] w-auto max-w-[92vw] rounded-sm border border-cream/15 object-contain shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:max-h-[88vh]"
             />
             <motion.figcaption
               initial={{ opacity: 0 }}
@@ -98,6 +106,7 @@ export function MenuLightbox({ project, onClose }: MenuLightboxProps) {
           </figure>
         </motion.div>
       ) : null}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
 }
