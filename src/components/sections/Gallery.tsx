@@ -87,12 +87,14 @@ function FeedCard({
   item: FeedItem
   featured?: boolean
   pinnedCaption?: boolean
-  /* BRAND REFRESH — mobile gap fix: when a row-group (supporting/overflow)
-     has an odd item count, the last card would otherwise sit alone in a
-     2-col mobile row, leaving an awkward empty cell beside it. This spans
-     the full row on mobile but caps its own width back down to a normal
-     card size and centers it, so it reads as "one more flyer" rather than
-     a second featured tile. Resets to normal single-column behavior at sm+. */
+  /* BRAND REFRESH — mobile gap fix v2: when a row-group (supporting/
+     overflow) has an odd item count, the last card would otherwise sit
+     alone in a 2-col mobile row, leaving an empty cell beside it.
+     Centering it at normal card width (v1) still read as "a gap" with
+     padding on both sides, so instead it now spans the full row —
+     same treatment as `featured` — filling the row cleanly instead of
+     floating in the middle of empty space. Resets to normal
+     single-column behavior at sm+. */
   trailingOdd?: boolean
   delay?: number
 }) {
@@ -109,8 +111,7 @@ function FeedCard({
       className={cn(
         "aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
         featured && "col-span-2 sm:row-span-2",
-        trailingOdd &&
-          "col-span-2 mx-auto max-w-[calc(50%-0.25rem)] sm:col-span-1 sm:mx-0 sm:max-w-none"
+        trailingOdd && "col-span-2 sm:col-span-1"
       )}
       aria-label={item.alt}
     >
