@@ -99,21 +99,22 @@ function FeedCard({
   delay?: number
 }) {
   return (
-    <motion.a
-      href={item.src}
-      target="_blank"
-      rel="noreferrer"
+    <motion.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.28, delay }}
       whileHover={{ scale: 1.02 }}
       className={cn(
-        "aged-photo group relative aspect-[819/1024] overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
+        // BRAND REFRESH: these flyers used to open the raw image in a new
+        // tab (a leftover from early placeholder content) — not an actual
+        // destination worth linking to, so this is now a plain hover
+        // card: no href/target, no focus-visible link outline, just the
+        // same hover-reveal caption treatment.
+        "aged-photo group relative aspect-[819/1024] cursor-default overflow-hidden rounded-sm border border-espresso/20 bg-cream-stain/40 shadow-soft",
         featured && "col-span-2 sm:row-span-2",
         trailingOdd && "col-span-2 sm:col-span-1"
       )}
-      aria-label={item.alt}
     >
       <img
         src={item.src}
@@ -125,9 +126,7 @@ function FeedCard({
       <span
         className={cn(
           "pointer-events-none absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-2 bg-gradient-to-t from-espresso/80 to-transparent px-2.5 pb-2.5 pt-8 transition-opacity duration-250",
-          pinnedCaption
-            ? "opacity-100"
-            : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+          pinnedCaption ? "opacity-100" : "opacity-0 group-hover:opacity-100"
         )}
       >
         <span className="font-caption text-xs font-semibold uppercase tracking-[0.12em] text-cream">
@@ -139,7 +138,7 @@ function FeedCard({
           </span>
         ) : null}
       </span>
-    </motion.a>
+    </motion.div>
   )
 }
 
